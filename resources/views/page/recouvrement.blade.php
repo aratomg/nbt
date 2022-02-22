@@ -105,7 +105,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Liste des Voyages Non Facturés</h3>
+                            <h3 class="card-title">Liste des factures Non Payé</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
@@ -152,20 +152,43 @@
                             <div class="modal-body">
                               <form id="payer">
                                   @csrf
-                                  <input type="hidden" name="id_carte" id="id_carte">
-                                  <div class="form-group">
-                                    <label for="cin">Date</label>
-                                    <input type="hidden" id="id_facture" name="id_facture">
-                                    <input type="date" class="form-control" name="date_payement" id="date_payement" >
+                                    <div class="form-group">
+                                        <label for="cin">Date Recouvrement</label>
+                                        <input type="hidden" id="id_facture" name="id_facture">
+                                        <input type="date" class="form-control" name="date_payement" id="date_payement" >
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="Type de payement">Type de payement</label>
+                                        <select name="type_p" id="type_p" class="form-control" required>
+                                            <option value=""></option>
+                                            <option value="Espece">Espece</option>
+                                            <option value="Cheque">Cheque</option>
+                                        </select>
+                                    </div>
+                                  <div class="esp">
+                                    <div class="form-group">
+                                        <label for="prenom">Montant</label>
+                                        <input type="text" class="form-control" name="montant_payement" id="montant_payement" >
+                                    </div>
                                   </div>
-                                  <div class="form-group">
-                                      <label for="prenom">Montant</label>
-                                      <input type="text" class="form-control" name="montant_payement" id="montant_payement" >
-                                  </div>
+                                  <div id="cq">
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">Date Cheque</label>
+                                        <input type="date" class="form-control" name="date_chek" id="date_chek" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">N°</label>
+                                        <input type="text" class="form-control" name="numero" id="numero" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">Montant</label>
+                                        <input type="number" class="form-control" name="montant" id="montant" >
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
-                              <button type="submit" class="btn btn-secondary btn-flat">Enregistrer</button>
+                              <button type="button" class="btn btn-secondary btn-flat" id="ajouter">Enregistrer</button>
                             </form>
                             </div>
                           </div>
@@ -201,6 +224,7 @@
         var table;
 
         $(document).ready(function(){
+            $('#cq').hide();
             table = $('#list_recouvrement').dataTable({
                 "order" : [],
                 "ajax" : {
@@ -242,6 +266,60 @@
             });
             return false;
     });
+    $('#type_p').on('change', function(){
+        if($('#type_p').val() === 'Cheque') {
+            $('#cq').show();
+            $('.esp').hide();
+        }else{
+            $('#cq').hide();
+            $('.esp').show();
+        }
+    });
+    $('#ajouter').on('click', function() {
+        var id_facture = $('#id_facture').val();
+        var date_payement = $('#date_payement').val();
+        var date_chek = $('#date_chek').val();
+        var numero = $('#numero').val();
+        if ($('#type_p').val() === 'Cheque') {
+            var montant = $('#montant').val();
+        }else{
+            var montant = $('#montant_payement').val();
+        }
+        $.ajax({
+            url : "{{ route('add_recouvrement') }}",
+            method : 'POST',
+            dataType : 'json',
+            data : {
+                _token : '{{ csrf_token() }}',
+                id_facture : id_facture,
+                date_payement : date_payement,
+                montant_payement : montant
+            },
+            success : function(response){
+                $.ajax({
+                    url : "{{ route('add_chek') }}",
+                    method : 'POST',
+                    dataType : 'json',
+                    data : {
+                        _token : '{{ csrf_token() }}',
+                        id_facture : id_facture,
+                        date_chek : date_chek,
+                        montant_chek : montant,
+                        numero : numero
+                    },
+                    success : function(response){
+                    }
+                });
+                $("#payer")[0].reset();
+                $('#modal_modif').modal('hide');
+                Toast.fire({
+                    icon : 'success',
+                    title : 'Enregistrer avec succes'
+                });
+                table.api().ajax.reload();
+            }
+        });
+    })
 
 
     </script>

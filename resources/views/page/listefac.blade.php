@@ -263,7 +263,34 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8">
-
+                                        <div class="form-group row">
+                                            <label for="Type de payement">Type de payement</label>
+                                            <select name="type_p" id="type_p" class="form-control col-sm-3" >
+                                                <option value=""></option>
+                                                <option value="Espece">Espece</option>
+                                                <option value="Cheque">Cheque</option>
+                                            </select>
+                                        </div>
+                                        <div id="cq">
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Date Cheque</label>
+                                                <div class="col-sm-3">
+                                                    <input type="date" class="form-control" name="date_cheque" id="date_cheque" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">N°</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" name="numero" id="numero" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Montant</label>
+                                                <div class="col-sm-3">
+                                                    <input type="number" class="form-control" name="montant" id="montant" >
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group row">
@@ -395,6 +422,7 @@
         var table1;
         $(document).ready(function(){
             $('#echeance_').hide();
+            $('#cq').hide();
             table = $('#list_facture').dataTable({
                 "order" : [],
                 "ajax" : {
@@ -511,10 +539,17 @@
                         $('#total_final').val(response.facture[0].total_final);
                         $('#date_fact').val(response.facture[0].date_fact);
                         $('#date_echeance').val(response.facture[0].date_echeance);
-                        $('#id_facture').val(response.facture[0].id_facture)
+                        $('#id_facture').val(response.facture[0].id_facture);
+                        if (response.chek[0].numero ) {
+                            $('#type_p').val('Cheque');
+                            $('#cq').show();
+                        }
+                        $('#numero').val(response.chek[0].numero);
+                        $('#date_cheque').val(response.chek[0].date_chek);
+                        $('#montant').val(response.chek[0].montant_chek);
                         for (let i = 0; i < response.avoir.length; i++) {
                             $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td>" + response.avoir[i].ref_marc
-                                 +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'><a href='javascript:void(0)' class='badge badge-danger rounded badge-delete' id='suppr'><i class='feather icon-trash'></i></a></td></tr>"
+                                 +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'><button type=\"button\" class=\"btn btn-danger btn-flat badge-delete\" >Supprimer</button></td></tr>"
                             );
                         }
                         $('#modal_modif').modal('show');
@@ -550,11 +585,22 @@
                                 }
                             })
                             .done(function(response) {
-                                Toast.fire({
-                                    icon : 'success',
-                                    title : 'Supprimer avec succes'
-                                });
-                                table.api().ajax.reload();
+                                    $.ajax({
+                                    url: "{{ route('delete_chek') }}",
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {
+                                        _token : '{{ csrf_token() }}',
+                                        id_facture : code
+                                    },
+                                    success : function(response) {
+                                        Toast.fire({
+                                            icon : 'success',
+                                            title : 'Supprimer avec succes'
+                                        });
+                                        table.api().ajax.reload();
+                                    }
+                                })
                             })
                             .fail(function(response) {
                                 Swal.fire(
@@ -657,6 +703,25 @@
                         icon : 'success',
                         title : 'Enregistrer avec succes'
                     });
+                    var date_cheque = $('#date_cheque').val();
+                    var numero = $('#numero').val();
+                    var montant = $('#montant').val();
+                    if ($('#type_p').val() === 'Cheque') {
+                        $.ajax({
+                            url : "{{ route('update_chek') }}",
+                            method : 'POST',
+                            dataType : 'json',
+                            data : {
+                                _token : '{{ csrf_token() }}',
+                                id_facture : response.id_facture,
+                                date_chek : date_cheque,
+                                montant_chek : montant,
+                                numero : numero
+                            },
+                            success : function(response){
+                            }
+                        });
+                    }
                     table1.api().ajax.reload();
                     table.api().ajax.reload();
                 }
@@ -668,6 +733,13 @@
             $('#echeance_').show();
         }else{
             $('#echeance_').hide();
+        }
+    });
+    $('#type_p').on('change', function(){
+        if($('#type_p').val() === 'Cheque') {
+            $('#cq').show();
+        }else{
+            $('#cq').hide();
         }
     });
     </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avoir;
+use App\Models\Chek;
 use App\Models\Facture;
 use App\Models\Recouvrement;
 use App\Models\Voyage;
@@ -90,9 +91,15 @@ class FactureController extends Controller
         ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')
         ->join('detail', 'detail.id_voyage', '=', 'avoir.id_voyage')
         ->where('id_facture', '=', $id)->get();
+        $chek = Chek::where('id_facture', '=', $id)->get();
+        if (count($chek) <= 0) {
+            $chek = array();
+            $chek[]['numero'] = null;
+        }
         $data = array(
                 'avoir' => $avoir,
-                'facture' => $result
+                'facture' => $result,
+                'chek' => $chek
             );
         echo  json_encode($data);
     }

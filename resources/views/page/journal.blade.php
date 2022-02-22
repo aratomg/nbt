@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Recouvrement')
+@section('title', 'journal')
 @section('container')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -9,7 +9,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        <Cite>Recouvrement</Cite>
+                        <Cite></Cite>
                     </h1>
                 </div>
                 <!-- /.col -->
@@ -33,8 +33,19 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
-                    {{-- <button type="button" class="btn btn-block btn-secondary btn-flat" id="add_facture">Ajouter</button> --}}
-                    {{-- <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add" >Ajouter</button> --}}
+                    <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add" >Ajouter Autre</button>
+                    {{-- <div class="form-group">
+                        <label for="">Année</label>
+                        <select name="annee" id="annee" class="form-control">
+                            <option value=""></option>
+                            @forelse ($annee as $key)
+                                <option value="{{ $key->annee }}">{{ $key->annee }}</option>
+                            @empty
+
+                            @endforelse
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-block btn-secondary btn-flat" id="valider">Valider</button> --}}
                     <!-- small box -->
                     <!-- <div class="small-box bg-info">
                         <div class="inner">
@@ -50,6 +61,7 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
+
                     <!-- small box -->
                     <!-- <div class="small-box bg-success">
                         <div class="inner">
@@ -65,6 +77,7 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
+
                     <!-- small box -->
                     <!-- <div class="small-box bg-warning">
                         <div class="inner">
@@ -105,32 +118,32 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Liste des facture Payé</h3>
+                            <h3 class="card-title">Journal Caisse {{ $anne }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
                             <div>
-                                <table id="list_recouvrement" class="table table-hover text-nowrap">
+                                <table id="list" class="table table-hover text-nowrap">
                                     <thead>
                                         <tr role="row">
                                             <th>
-                                                N° facture
+                                                Date
+                                            </th>
+                                            <th>
+                                                Chek
                                             </th>
                                             <th >
-                                                Type
+                                                Designation
                                             </th>
                                             <th>
-                                                Date echeance
+                                                Camion
                                             </th>
                                             <th>
-                                                Montant
+                                                Autre
                                             </th>
-                                            <th>
-                                                Date payement
-                                            </th>
-                                            <th>
-                                                Montant payé
-                                            </th>
+                                            {{-- <th>
+                                                Solde
+                                            </th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -141,42 +154,6 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <div class="modal fade show" id="modal_modif" style="display: none; padding-right: 14px;" aria-modal="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            {{-- <div class="modal-header">
-                                <h5 class="m-0 text-dark">
-                                    <Cite>Ajouter un Chauffeur</Cite>
-                                </h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                              </button>
-                            </div> --}}
-                            <div class="modal-body">
-                              <form id="payer">
-                                  @csrf
-                                  <input type="hidden" name="id_carte" id="id_carte">
-                                  <div class="form-group">
-                                    <label for="cin">Date</label>
-                                    <input type="hidden" id="id_facture" name="id_facture">
-                                    <input type="date" class="form-control" name="date_payement" id="date_payement" >
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="prenom">Montant</label>
-                                      <input type="text" class="form-control" name="montant_payement" id="montant_payement" >
-                                  </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
-                              <button type="submit" class="btn btn-secondary btn-flat">Enregistrer</button>
-                            </form>
-                            </div>
-                          </div>
-                          <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                      </div>
-
 
                 </section>
                 <!-- /.Left col -->
@@ -189,6 +166,44 @@
             <!-- /.row (main row) -->
         </div>
         <!-- /.container-fluid -->
+
+        <div class="modal fade show" id="modal_add" style="display: none; padding-right: 14px;" aria-modal="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                {{-- <div class="modal-header">
+                    <h5 class="m-0 text-dark">
+                        <Cite>Ajouter un Chauffeur</Cite>
+                    </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div> --}}
+                <div class="modal-body">
+                  <form id="payer">
+                      @csrf
+                        <div class="form-group">
+                            <label for="cin">Date</label>
+                            <input type="date" class="form-control" name="date_autre" id="date_autre" >
+                        </div>
+                        <div class="form-group">
+                            <label for="cin">Designation</label>
+                            <input type="text" class="form-control" name="designation" id="designation" >
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Montant</label>
+                            <input type="text" class="form-control" name="montant" id="montant" >
+                        </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
+                  <button type="button" class="btn btn-secondary btn-flat" id="ajouter">Enregistrer</button>
+                </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </section>
     <!-- /.content -->
 </div>
@@ -204,23 +219,52 @@
         var table;
 
         $(document).ready(function(){
-            table = $('#list_recouvrement').dataTable({
+            $('#echeance_').hide();
+            $('#cq').hide();
+            table = $('#list').dataTable({
                 "order" : [],
                 "ajax" : {
-                    "url" : "{{ route('liste_recou') }}",
+                    "url" : "{{ route('journal_liste') }}",
                     "dataScr" : "data"
                 },
                 "columns" : [
-                    {data: 'num_fac'},
-                    {data: 'type'},
-                    {data: 'date'},
-                    {data: 'montant'},
-                    {data: 'date1'},
-                    {data: 'montant1'}
+                        {data: 'date'},
+                        {data : 'chek'},
+                        {data: 'designation'},
+                        {data: 'camion'},
+                        {data : 'autre'},
+                        // {data : 'solde'}
+
+                ],
+                order: [
+                    [0, 'Asc']
                 ]
             });
         })
-
-
+    $('#ajouter').on('click', function(){
+        var date = $('#date_autre').val();
+        var montant = $('#montant').val();
+        var designation = $('#designation').val();
+        $.ajax({
+            url : "{{ route('add_autre') }}",
+            method : 'POST',
+            dataType : 'json',
+            data : {
+                _token : '{{ csrf_token() }}',
+                date_autre : date,
+                montant : montant,
+                designation : designation
+            },
+            success : function(response){
+                $('#modal_add').modal('hide');
+                    Toast.fire({
+                        icon : 'success',
+                        title : 'Enregistrer avec succes'
+                    });
+                $("#payer")[0].reset();
+                table.api().ajax.reload();
+            }
+        });
+    })
     </script>
 @endsection

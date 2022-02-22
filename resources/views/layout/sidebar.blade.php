@@ -35,9 +35,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            {{-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
@@ -47,10 +47,10 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
                 </li>
-            </ul>
+            </ul> --}}
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
+            {{-- <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -59,11 +59,11 @@
           </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
+                {{-- <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
@@ -120,12 +120,12 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li> --}}
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+                        <span class="badge badge-warning navbar-badge"><!--shortcode_nombre--></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -147,14 +147,14 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
-            </ul>
-        </nav>
+            </ul> --}}
+        </nav> --}}
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -182,6 +182,35 @@
                     <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <li class="nav-item has-treeview menu-open">
+                <a href="{{ route('page.journal') }}" class="nav-link active">
+
+                    <p>
+                        Journal Caisse
+                        <!-- <i class="right fas fa-angle-left"></i> -->
+                    </p>
+                </a>
+                <!-- <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="./index.html" class="nav-link active">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dashboard v1</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./index2.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dashboard v2</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./index3.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dashboard v3</p>
+                        </a>
+                    </li>
+                </ul> -->
+            </li>
                         <li class="nav-item has-treeview menu-open">
                             <a href="{{ route('page.chauffeur') }}" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -211,14 +240,27 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('page.camion') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+
+                        <li class="nav-item has-treeview">
+                            <a  class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
-                                    Camions
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Camion
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('page.camion') }}" class="nav-link">
+                                        <p>liste Camion</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('page.norme') }}" class="nav-link">
+                                        <p>Norme par camion</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{ route('page.voyage') }}" class="nav-link">
@@ -316,7 +358,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
+                        {{-- <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
@@ -350,7 +392,7 @@
                                     </a>
                                 </li>
                             </ul> -->
-                        </li>
+                        </li> --}}
                         <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
@@ -374,6 +416,17 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview">
+                            <a href="{{ route('page.chek') }}" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Cheque
+                                    {{-- <i class="fas fa-angle-left right"></i> --}}
+                                </p>
+                            </a>
+
+                        </li>
+
                         <!-- <li class="nav-header">EXAMPLES</li>
                         <li class="nav-item">
                             <a href="pages/calendar.html" class="nav-link">

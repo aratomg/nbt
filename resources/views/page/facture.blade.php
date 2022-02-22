@@ -261,7 +261,7 @@
                                 <div class="row">
                                     <div class="col-sm-8" >
                                         <div class="form-group row">
-                                            <label for="Mode de payement">Mode de payement</label>
+                                            <label for="Mode de payement">Mode de payement </label>
                                             <select name="mode" id="mode" class="form-control col-sm-3" required>
                                                 <option value=""></option>
                                                 <option value="comptant">Comptant</option>
@@ -289,7 +289,34 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8">
-
+                                        <div class="form-group row">
+                                            <label for="Type de payement">Type de payement</label>
+                                            <select name="type_p" id="type_p" class="form-control col-sm-3" >
+                                                <option value=""></option>
+                                                <option value="Espece">Espece</option>
+                                                <option value="Cheque">Cheque</option>
+                                            </select>
+                                        </div>
+                                        <div id="cq">
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Date Cheque</label>
+                                                <div class="col-sm-3">
+                                                    <input type="date" class="form-control" name="date_cheque" id="date_cheque" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">N°</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" name="numero" id="numero" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Montant</label>
+                                                <div class="col-sm-3">
+                                                    <input type="number" class="form-control" name="montant" id="montant" >
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group row">
@@ -375,6 +402,7 @@
 
         $(document).ready(function(){
             $('#echeance_').hide();
+            $('#cq').hide();
             table = $('#list_voyage').dataTable({
                 "order" : [],
                 "ajax" : {
@@ -424,7 +452,7 @@
                     .text() +" DU "+ checked.parents('tr').find('td:eq(1)').text() +" Cam N° "+ checked.parents('tr').find('td:eq(4)').text() +"</td><td>" + checked.parents('tr').find('td:eq(6)')
                     .text() + "</td><td>"+ checked.parents('tr').find('td:eq(7)')
                     .text() + "</td><td>"+  checked.parents('tr').find('td:eq(8)')
-                    .text() + "</td><td style='text-align:center !important;'><a href='javascript:void(0)' class='badge badge-danger rounded badge-delete' id='suppr'><i class='feather icon-trash'></i></a></td></tr>"
+                    .text() + "</td><td style='text-align:center !important;'><button type=\"button\" class=\"btn btn-danger btn-flat badge-delete\" >Supprimer</button></td></tr>"
                 );
                 // reference.push(checked.parents('tr').find('td:eq(0)').text());
                 reference.push(checked.val());
@@ -457,6 +485,9 @@
         var total_final = $('#total_final').val();
         var date_fact = $('#date_fact').val();
         var date_echeance = $('#date_echeance').val();
+        var date_cheque = $('#date_cheque').val();
+        var numero = $('#numero').val();
+        var montant = $('#montant').val();
         $("#list_voyage_facture > tbody > tr").each(function() {
             voyage.push($(this).find('td:eq(0)').text());
         })
@@ -498,6 +529,22 @@
                             }
                         });
                     }
+                    if ($('#type_p').val() === 'Cheque') {
+                        $.ajax({
+                            url : "{{ route('add_chek') }}",
+                            method : 'POST',
+                            dataType : 'json',
+                            data : {
+                                _token : '{{ csrf_token() }}',
+                                id_facture : response.id_facture,
+                                date_chek : date_cheque,
+                                montant_chek : montant,
+                                numero : numero
+                            },
+                            success : function(response){
+                            }
+                        });
+                    }
                     Toast.fire({
                         icon : 'success',
                         title : 'Enregistrer avec succes'
@@ -518,6 +565,13 @@
             $('#echeance_').show();
         }else{
             $('#echeance_').hide();
+        }
+    });
+    $('#type_p').on('change', function(){
+        if($('#type_p').val() === 'Cheque') {
+            $('#cq').show();
+        }else{
+            $('#cq').hide();
         }
     });
     </script>

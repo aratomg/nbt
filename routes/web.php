@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AutreController;
 use App\Http\Controllers\CamionController;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\ChekController;
 use App\Http\Controllers\ConsoGasoilController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\DetailController;
@@ -9,7 +11,9 @@ use App\Http\Controllers\FactureController;
 use App\Http\Controllers\FactureListeController;
 use App\Http\Controllers\GasoilController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NormeController;
 use App\Http\Controllers\RecouvrementController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Middleware\AppAuth;
@@ -39,9 +43,7 @@ Route::prefix('/')->group(function () {
 
 Route::middleware(['auth'])->group(function(){
     Route::middleware(['appAuth:admin'])->group(function(){
-        Route::prefix('/index')->group(function(){
-            Route::get('/', [IndexController::class ,'index'])->name('page.index');
-        });
+
         Route::prefix('/chauffeur')->group(function(){
             Route::get('/', [ChauffeurController::class, 'index'])->name('page.chauffeur');
             Route::get('/liste', [ChauffeurController::class, 'list_chauffeur'])->name('list_chauffeur');
@@ -104,6 +106,24 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/liste', [RecouvrementController::class, 'list'])->name('liste_recouvrement');
             Route::get('/liste_recouvrement', [RecouvrementController::class, 'index_list'])->name('page_liste_recou');
             Route::get('/array', [RecouvrementController::class, 'liste_rec'])->name('liste_recou');
+        });
+        Route::prefix('/norme')->group(function(){
+            Route::any('/', [NormeController::class, 'index'])->name('page.norme');
+            Route::any('/mois', [NormeController::class, 'mois'])->name('norme.mois');
+        });
+        Route::prefix('/chek')->group(function(){
+            Route::post('/add', [ChekController::class, 'add'])->name('add_chek');
+            Route::post('/update', [ChekController::class, 'update'])->name('update_chek');
+            Route::post('/delete', [ChekController::class, 'delete'])->name('delete_chek');
+            Route::get('/', [ChekController::class, 'index'])->name('page.chek');
+            Route::get('/liste', [ChekController::class, 'liste'])->name('chek_liste');
+        });
+        Route::prefix('/index')->group(function(){
+            Route::get('/', [JournalController::class, 'index'])->name('page.journal');
+            Route::any('/liste', [JournalController::class, 'liste'])->name('journal_liste');
+        });
+        Route::prefix('/autre')->group(function(){
+            Route::post('/add', [AutreController::class, 'add'])->name('add_autre');
         });
     });
 });

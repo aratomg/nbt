@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Facture;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +27,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function(){
+            $data = Facture::Leftjoin('recouvrement', 'facture.id_facture', '=', 'recouvrement.id_facture')->where('date_echeance','<', Carbon::now())->whereNull('date_payement')->get();
+            $nombre = count($data);
+
+        })->everyMinute();
     }
 
     /**

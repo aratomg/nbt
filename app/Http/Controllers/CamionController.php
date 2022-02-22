@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Camion;
+use App\Notifications\Historique;
 use Illuminate\Http\Request;
 
 class CamionController extends Controller
@@ -14,7 +15,8 @@ class CamionController extends Controller
     public function add(Request $request)
     {
         $data = $request->input();
-        echo json_encode(Camion::create($data));
+        $result = Camion::create($data);
+        echo json_encode($result);
     }
     public function get(Request $request)
     {

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Depenses extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $table = 'depense';
     protected $primaryKey = 'id_depense';
     public $timestamps = false;

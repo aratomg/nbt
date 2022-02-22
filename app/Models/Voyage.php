@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Voyage extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $table = 'voyage';
     protected $primaryKey = 'id_voyage';
     public $timestamps = false;
