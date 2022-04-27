@@ -34,34 +34,10 @@
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add" >Ajouter Autre</button>
-                    {{-- <div class="form-group">
-                        <label for="">Année</label>
-                        <select name="annee" id="annee" class="form-control">
-                            <option value=""></option>
-                            @forelse ($annee as $key)
-                                <option value="{{ $key->annee }}">{{ $key->annee }}</option>
-                            @empty
-
-                            @endforelse
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-block btn-secondary btn-flat" id="valider">Valider</button> --}}
-                    <!-- small box -->
-                    <!-- <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div> -->
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-
+                    <button type="button" class="btn btn-block btn-secondary btn-flat" id="modal_add_piece" data-toggle="modal" data-target="#modal_piece">Achat Piece</button>
                     <!-- small box -->
                     <!-- <div class="small-box bg-success">
                         <div class="inner">
@@ -77,7 +53,7 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-
+                    <button  class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_pneu">Achat Pneu</button>
                     <!-- small box -->
                     <!-- <div class="small-box bg-warning">
                         <div class="inner">
@@ -93,6 +69,7 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
+                    <button type="button" class="btn btn-block btn-secondary btn-flat"data-toggle="modal" data-target="#modal_chek">Chek</button>
                     <!-- small box -->
                     <!-- <div class="small-box bg-danger">
                         <div class="inner">
@@ -170,14 +147,6 @@
         <div class="modal fade show" id="modal_add" style="display: none; padding-right: 14px;" aria-modal="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                {{-- <div class="modal-header">
-                    <h5 class="m-0 text-dark">
-                        <Cite>Ajouter un Chauffeur</Cite>
-                    </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div> --}}
                 <div class="modal-body">
                   <form id="payer">
                       @csrf
@@ -197,6 +166,108 @@
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
                   <button type="button" class="btn btn-secondary btn-flat" id="ajouter">Enregistrer</button>
+                </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade show" id="modal_piece" style="display: none; padding-right: 14px;" aria-modal="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                {{-- <div class="modal-header">
+                    <h5 class="m-0 text-dark">
+                        <Cite>Ajouter un Chauffeur</Cite>
+                    </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div> --}}
+                <div class="modal-body">
+                  <form id="piece">
+                      @csrf
+                        <div class="form-group">
+                            <label for="cin">Date</label>
+                            <input type="date" class="form-control" name="date_piece" id="date_piece" >
+                        </div>
+                        <div class="form-group">
+                            <label for="desigantion">Désigantion</label>
+                            <input class="form-control" type="text" name="designation" id="designation_piece">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prix</label>
+                            <input type="text" class="form-control" name="prix" id="prix" >
+                        </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-secondary btn-flat" id="ajouter_piece">Enregistrer</button>
+                </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade show" id="modal_pneu" style="display: none; padding-right: 14px;" aria-modal="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <form id="pneu">
+                      @csrf
+                        <div class="form-group">
+                            <label for="cin">Date</label>
+                            <input type="date" class="form-control" name="date_pneu" id="date_pneu" >
+                        </div>
+                        <div class="form-group">
+                            <label for="desigantion">Désigantion</label>
+                            <input class="form-control" type="text" name="designation" id="designation">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prix</label>
+                            <input type="text" class="form-control" name="prix" id="prix" >
+                        </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-secondary btn-flat" id="ajouter">Enregistrer</button>
+                </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade show" id="modal_chek" style="display: none; padding-right: 14px;" aria-modal="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <form id="chek">
+                      @csrf
+                        <div class="form-group">
+                            <label for="cin">Date</label>
+                            <input type="date" class="form-control" name="date_chek" id="date_chek" >
+                        </div>
+                        <div class="form-group">
+                            <label for="nmreo">N°</label>
+                            <input type="text" class="form-control" name="numero" id="numero">
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">Désignation</label>
+                            <input type="text" class="form-control" name="designation" id="designation">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Montant</label>
+                            <input type="text" class="form-control" name="montant_chek" id="montant" >
+                        </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-secondary btn-flat" id="ajouter">Enregistrer</button>
                 </form>
                 </div>
               </div>
@@ -266,5 +337,118 @@
             }
         });
     })
+    // $('#ajouter_piece').on('click', function(){
+    //     var date = $('#date_piece').val();
+    //     var designation_piece = $('#designation_piece').val();
+    //     var prix = $('#prix').val();
+    //     $.ajax({
+    //         url : "{{ route('add_piece') }}",
+    //         method : 'POST',
+    //         dataType : 'json',
+    //         data : {
+    //             _token : '{{ csrf_token() }}',
+    //             date_piece : date_piece,
+    //             prix : prix,
+    //             designation : designation_piece
+    //         },
+    //         success : function(response){
+    //             $('#modal_piece').modal('hide');
+    //                 Toast.fire({
+    //                     icon : 'success',
+    //                     title : 'Enregistrer avec succes'
+    //                 });
+    //             $("#piece")[0].reset();
+    //             table.api().ajax.reload();
+    //         }
+    //     });
+    // })
+    $('#piece').unbind('submit').bind('submit', function() {
+        var form = new FormData(this);
+            $.ajax({
+                url : "{{ route('add_piece') }}",
+                data : new FormData(this),
+                type : "POST",
+                contentType : false,
+                cache : false,
+                processData : false,
+                dataType : 'json',
+                success : function(response){
+                    $("#piece")[0].reset();
+                    $('#modal_piece').modal('hide');
+                    Toast.fire({
+                        icon : 'success',
+                        title : 'Enregistrer avec succes'
+                    });
+                    table.api().ajax.reload();
+                }
+            });
+            return false;
+    });
+    $('#pneu').unbind('submit').bind('submit', function() {
+        var form = new FormData(this);
+            $.ajax({
+                url : "{{ route('add_pneu') }}",
+                data : new FormData(this),
+                type : "POST",
+                contentType : false,
+                cache : false,
+                processData : false,
+                dataType : 'json',
+                success : function(response){
+                    $("#pneu")[0].reset();
+                    $('#modal_pneu').modal('hide');
+                    Toast.fire({
+                        icon : 'success',
+                        title : 'Enregistrer avec succes'
+                    });
+                    table.api().ajax.reload();
+                }
+            });
+            return false;
+    });
+    $('#pneu').unbind('submit').bind('submit', function() {
+        var form = new FormData(this);
+            $.ajax({
+                url : "{{ route('add_pneu') }}",
+                data : new FormData(this),
+                type : "POST",
+                contentType : false,
+                cache : false,
+                processData : false,
+                dataType : 'json',
+                success : function(response){
+                    $("#pneu")[0].reset();
+                    $('#modal_pneu').modal('hide');
+                    Toast.fire({
+                        icon : 'success',
+                        title : 'Enregistrer avec succes'
+                    });
+                    table.api().ajax.reload();
+                }
+            });
+            return false;
+    });
+    $('#chek').unbind('submit').bind('submit', function() {
+        var form = new FormData(this);
+            $.ajax({
+                url : "{{ route('add_chek') }}",
+                data : new FormData(this),
+                type : "POST",
+                contentType : false,
+                cache : false,
+                processData : false,
+                dataType : 'json',
+                success : function(response){
+                    $("#chek")[0].reset();
+                    $('#modal_chek').modal('hide');
+                    Toast.fire({
+                        icon : 'success',
+                        title : 'Enregistrer avec succes'
+                    });
+                    table.api().ajax.reload();
+                }
+            });
+            return false;
+    });
     </script>
 @endsection

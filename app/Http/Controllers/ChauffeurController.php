@@ -33,8 +33,8 @@ class ChauffeurController extends Controller
                 $output['data'][] = array(
                     'nom' => $chauffeur->nom,
                     'prenom' => $chauffeur->prenom,
-                    'cin' => $chauffeur->cin,
-                    'adresse' => $chauffeur->adresse,
+                    'permis' => $chauffeur->permis,
+                    'date_permis' => $chauffeur->date_permis,
                     'tel' => $chauffeur->tel,
                     'action' => $action
                 );

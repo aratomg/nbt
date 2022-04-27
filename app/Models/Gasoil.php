@@ -14,6 +14,6 @@ class Gasoil extends Model
     public $timestamps = false;
     protected $fillable = [
         'libelle',
-        'capacite'
+        'plafond'
     ];
 }

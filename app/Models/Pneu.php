@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chek extends Model
+class Pneu extends Model
 {
     use HasFactory;
-    protected $table = 'chek';
-    protected $primaryKey = 'id_cheque';
+    protected $table = "pneu";
+    protected $primairyKey = "id_table";
     public $timestamps = false;
     protected $fillable = [
-        'numero' ,
-        'date_chek',
-        'montant_chek',
-        'designation'
+        'designation',
+        'date_pneu',
+        'prix',
     ];
 }

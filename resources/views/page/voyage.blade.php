@@ -34,48 +34,23 @@
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add" >Ajouter</button>
-                    <!-- small box -->
-                    <!-- <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div> -->
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <!-- <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
+                    <form action="{{ route('import-voyage') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group mb-4">
+                            <div class="custom-file text-left">
+                                <input type="file" name="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div> -->
+                        <button class="btn btn-primary">Import Users</button>
+                        <a class="btn btn-success" href="{{ route('export-voyage') }}">Export Voyage</a>
+                    </form>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <!-- <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div> -->
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
@@ -214,7 +189,14 @@
                                             </div> --}}
                                             <div class="form-group col-6">
                                                 <label for="">Transit</label>
-                                                <input type="text" name="transit" id="transit" class="form-control">
+                                                <select  class="form-control" name="transit" id="transit">
+                                                    <option value=""></option>
+                                                    @forelse ($transit as $key)
+                                                        <option value="<?php echo $key->transit?>"> <?php echo $key->transit?></option>
+                                                    @empty
+
+                                                    @endforelse
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +214,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
-                                                <label for="">Monatant Gasoil</label>
+                                                <label for="">Prix litre gasoil</label>
                                                 <input type="text" name="montant_gasoil" id="montant_gasoil" class="form-control" required>
                                             </div>
                                             <div class="form-group col-6">
@@ -258,7 +240,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
-                                                <label for="">Retour</label>
+                                                <label for="">Transit Retour</label>
                                                 <input type="text" name="retour" id="retour" class="form-control" >
                                             </div>
                                             <div class="form-group col-6">
@@ -266,17 +248,13 @@
                                                 <input type="number" name="tonnage_retout" id="tonnage_retour" class="form-control"min=0>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Norme</label>
-                                            <input type="number" name="norme" id="norme" class="form-control" min="0">
-                                        </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="">Reference Marchandise</label>
                                             <input type="text" name="ref_marc" id="ref_marc" class="form-control" >
-                                        </div>
-                                        <div class="row">
+                                        </div> --}}
+                                        {{-- <div class="row">
                                             <div class="form-group col-6">
                                                 <label>Nombre</label>
                                                 <input type="number" name="nombre" id="nombre" class="form-control" min="0" onmouseout="total()">
@@ -285,7 +263,7 @@
                                                 <label>Prix unitaire</label>
                                                 <input type="text" name="prix_unitaire" id="prix_unitaire" class="form-control" onmouseout="total()">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label for="">Montant</label>
                                             <input type="text" name="montant" id="montant" class="form-control">
@@ -414,7 +392,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-6">
-                                                    <label for="">Retour</label>
+                                                    <label for="">Transit Retour</label>
                                                     <input type="text" name="retour" id="retourMod" class="form-control" >
                                                 </div>
                                                 <div class="form-group col-6">
@@ -422,17 +400,13 @@
                                                     <input type="number" name="tonnage_retour" id="tonnage_retourMod" class="form-control" min="0">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="">Norme</label>
-                                                <input type="number" name="norme" id="normeMod" class="form-control" min="0">
-                                            </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="">Reference Marchandise</label>
-                                                <input type="text" name="ref_marc" id="ref_marcMod" class="form-control" >
+                                                <input type="text" name="ref_marc" id="ref_marcMod" class="form-control" > --}}
                                             </div>
-                                            <div class="row">
+                                            {{-- <div class="row">
                                                 <div class="form-group col-6">
                                                     <label>Nombre</label>
                                                     <input type="number" name="nombre" id="nombreMod" class="form-control" min="0" onmouseout="total1()">
@@ -441,7 +415,7 @@
                                                     <label>Prix unitaire</label>
                                                     <input type="text" name="prix_unitaire" id="prix_unitaireMod" class="form-control" onmouseout="total1()">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="">Montant</label>
                                                 <input type="text" name="montant" id="montantMod" class="form-control">

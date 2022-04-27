@@ -115,9 +115,9 @@
                                             <th >
                                                 Libelle
                                             </th>
-                                            {{-- <th >
-                                                Capacite
-                                            </th> --}}
+                                            <th >
+                                                Plafond
+                                            </th>
                                             <th >
                                                 action
                                             </th>
@@ -230,7 +230,7 @@
                 },
                 "columns" : [
                     {data: 'libelle'},
-                    // {data: 'capacite'},
+                    {data: 'plafond'},
                     {data: 'action'}
                 ]
             });
@@ -348,7 +348,7 @@
                 'Oops',
                 'Il y a une erreur! Veuillez actualiser la page s\'il vous plaît',
                 'error'
-                );
+            );
         }
     }
 

@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Camion')
+@section('title', 'Transit')
 @section('container')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -9,7 +9,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        <Cite>Camions</Cite>
+                        <Cite>Transit</Cite>
                     </h1>
                 </div>
                 <!-- /.col -->
@@ -104,28 +104,25 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Liste des Camions</h3>
+                            <h3 class="card-title">Liste des transits</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div>
-                                <table id="list_camion" class="table table-hover text-nowrap">
+                                <table id="list_transit" class="table table-hover text-nowrap">
                                     <thead>
                                         <tr role="row">
                                             <th>
-                                                Matricule
+                                                Transit
                                             </th>
                                             <th >
-                                                Marque
+                                                Clients
                                             </th>
                                             <th>
-                                                Genre
+                                                Nif
                                             </th>
                                             <th >
-                                                Modéle
-                                            </th>
-                                            <th>
-                                                norme
+                                                Stat
                                             </th>
                                             <th >
                                                 action
@@ -153,27 +150,23 @@
                               </button>
                             </div> --}}
                             <div class="modal-body">
-                              <form id="add_camion">
+                              <form id="add_transit">
                                   @csrf
                                   <div class="form-group">
-                                      <label for="nom">Matricules</label>
-                                      <input type="text" class="form-control" name="matricule" id="matricule" required>
+                                      <label for="transit">Transit</label>
+                                      <input type="text" class="form-control" name="transit" id="transit" required>
                                   </div>
                                   <div class="form-group">
-                                      <label for="marque">Marque</label>
-                                      <input type="text" class="form-control" name="marque" id="marque" required>
+                                      <label for="client">Client</label>
+                                      <input type="text" class="form-control" name="client" id="client" required>
                                   </div>
                                   <div class="form-group">
-                                      <label for="genre">Genre</label>
-                                      <input type="text" class="form-control" name="genre" id="genre">
+                                      <label for="nif">Nif</label>
+                                      <input type="text" class="form-control" name="nif" id="nif">
                                   </div>
                                   <div class="form-group">
-                                      <label for="modele">Model</label>
-                                      <input type="text" class="form-control" name="modele" id="modele" >
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="norme">Norme</label>
-                                    <input type="text" class="form-control" name="norme" id="norme" >
+                                      <label for="stat">Stat</label>
+                                      <input type="text" class="form-control" name="stat" id="stat" >
                                   </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -200,28 +193,24 @@
                               </button>
                             </div> --}}
                             <div class="modal-body">
-                              <form id="modif_camion">
+                              <form id="modif_transit">
                                   @csrf
-                                  <input type="hidden" name="id_camion" id="id_camion">
+                                  <input type="hidden" name="id_transit" id="id_transit">
                                   <div class="form-group">
-                                      <label for="nom">Matricule</label>
-                                      <input type="text" class="form-control" name="matricule" id="matriculeMod" >
+                                      <label for="transit">Transit</label>
+                                      <input type="text" class="form-control" name="transit" id="transitMod" >
                                   </div>
                                   <div class="form-group">
-                                    <label for="marque">Marque</label>
-                                    <input type="text" class="form-control" name="marque" id="marqueMod" >
+                                    <label for="client">Client</label>
+                                    <input type="text" class="form-control" name="client" id="clientMod" >
                                   </div>
                                   <div class="form-group">
-                                    <label for="genre">Genre</label>
-                                    <input type="text" class="form-control" name="genre" id="genreMod">
+                                    <label for="nif">Nif</label>
+                                    <input type="text" class="form-control" name="nif" id="nifMod">
                                   </div>
                                   <div class="form-group">
-                                      <label for="modele">Modele</label>
-                                      <input type="text" class="form-control" name="modele" id="modeleMod" >
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="norme">Norme</label>
-                                    <input type="text" class="form-control" name="norme" id="normeMod" >
+                                      <label for="stat">Stat</label>
+                                      <input type="text" class="form-control" name="stat" id="statMod" >
                                   </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -256,26 +245,25 @@
 var table;
     $(document).ready(function(){
 
-        table = $('#list_camion').dataTable({
+        table = $('#list_transit').dataTable({
                 "order" : [],
                 "ajax" : {
-                    "url" : "{{ route('list_camion') }}",
+                    "url" : "{{ route('liste_transit') }}",
                     "dataScr" : "data"
                 },
                 "columns" : [
-                    {data: 'matricule'},
-                    {data: 'marque'},
-                    {data : 'genre'},
-                    {data: 'modele'},
-                    {data : 'norme'},
+                    {data: 'transit'},
+                    {data: 'client'},
+                    {data : 'nif'},
+                    {data: 'stat'},
                     {data: 'action'}
                 ]
             });
     })
-    $('#add_camion').unbind('submit').bind('submit', function() {
+    $('#add_transit').unbind('submit').bind('submit', function() {
         var form = new FormData(this);
             $.ajax({
-                url : "{{ route('add_camion') }}",
+                url : "{{ route('add_transit') }}",
                 data : new FormData(this),
                 type : "POST",
                 contentType : false,
@@ -283,7 +271,7 @@ var table;
                 processData : false,
                 dataType : 'json',
                 success : function(response){
-                    $("#add_camion")[0].reset();
+                    $("#add_transit")[0].reset();
                     $('#modal_add').modal('hide');
                     Toast.fire({
                         icon : 'success',
@@ -294,10 +282,10 @@ var table;
             });
             return false;
     });
-    $('#modif_camion').unbind('submit').bind('submit', function() {
+    $('#modif_transit').unbind('submit').bind('submit', function() {
         var form = new FormData(this);
             $.ajax({
-                url : "{{ route('update_camion') }}",
+                url : "{{ route('update_transit') }}",
                 data : new FormData(this),
                 type : "POST",
                 contentType : false,
@@ -305,7 +293,7 @@ var table;
                 processData : false,
                 dataType : 'json',
                 success : function(response){
-                    $("#modif_camion")[0].reset();
+                    $("#modif_transit")[0].reset();
                     $('#modal_modif').modal('hide');
                     Toast.fire({
                         icon : 'success',
@@ -319,22 +307,20 @@ var table;
     function modif(code){
         if(code){
             $.ajax({
-                    url:"{{ route('get_camion') }}",
+                    url:"{{ route('get_transit') }}",
                     type: 'POST',
                     dataType: 'json',
                     data: {
                         _token : '{{ csrf_token() }}',
-                        id_camion : code
+                        id_transit : code
                     },
                     success: function(response){
-                        $('#matriculeMod').val(response[0].matricule);
-                        $('#marqueMod').val(response[0].marque);
-                        $('#modeleMod').val(response[0].modele);
-                        $('#genreMod').val(response[0].genre);
-                        $('#id_camion').val(response[0].id_camion);
-                        $('#normeMod').val(response[0].norme);
+                        $('#id_transit').val(response[0].id_transit);
+                        $('#transitMod').val(response[0].transit);
+                        $('#clientMod').val(response[0].client);
+                        $('#nifMod').val(response[0].nif);
+                        $('#statMod').val(response[0].stat)
                         $('#modal_modif').modal('show');
-
                     }
                 });
         }else{
@@ -357,12 +343,12 @@ var table;
                     preConfirm: function() {
                         return new Promise(function(resolve) {
                             $.ajax({
-                                url: "{{ route('delete_camion') }}",
+                                url: "{{ route('delete_transit') }}",
                                 type: 'POST',
                                 dataType: 'json',
                                 data: {
                                     _token : '{{ csrf_token() }}',
-                                    id_camion : code
+                                    id_transit : code
                                 }
                             })
                             .done(function(response) {

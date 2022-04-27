@@ -14,10 +14,14 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NormeController;
+use App\Http\Controllers\PieceController;
+use App\Http\Controllers\PneuController;
 use App\Http\Controllers\RecouvrementController;
+use App\Http\Controllers\TransitController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Middleware\AppAuth;
 use App\Models\Chauffeur;
+use App\Models\Transit;
 use App\Models\Voyage;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +36,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::post('/import',[VoyageController::class,'import'])->name('import-voyage');
+Route::get('/export-voyage',[VoyageController::class,'exportVoyage'])->name('export-voyage');
 
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -43,7 +48,17 @@ Route::prefix('/')->group(function () {
 
 Route::middleware(['auth'])->group(function(){
     Route::middleware(['appAuth:admin'])->group(function(){
+        Route::prefix('/transit')->group(function(){
+            Route::get('/', [TransitController::class, 'index'])->name('page.transit');
+            Route::get('/liste', [TransitController::class, 'liste'])->name('liste_transit');
+            Route::post('/update', [TransitController::class, 'update'])->name('update_transit');
+            Route::post('/get', [TransitController::class, 'get'])->name('get_transit');
+            Route::post('/post', [TransitController::class, 'delete'])->name('delete_transit');
+            Route::post('/add', [TransitController::class, 'add'])->name('add_transit');
+        });
+        Route::prefix('/piece')->group(function(){
 
+        });
         Route::prefix('/chauffeur')->group(function(){
             Route::get('/', [ChauffeurController::class, 'index'])->name('page.chauffeur');
             Route::get('/liste', [ChauffeurController::class, 'list_chauffeur'])->name('list_chauffeur');
@@ -121,6 +136,8 @@ Route::middleware(['auth'])->group(function(){
         Route::prefix('/index')->group(function(){
             Route::get('/', [JournalController::class, 'index'])->name('page.journal');
             Route::any('/liste', [JournalController::class, 'liste'])->name('journal_liste');
+            Route::post('/add_piece', [PieceController::class, 'add'])->name('add_piece');
+            Route::any('/add_pneu', [PneuController::class, 'add'])->name('add_pneu');
         });
         Route::prefix('/autre')->group(function(){
             Route::post('/add', [AutreController::class, 'add'])->name('add_autre');

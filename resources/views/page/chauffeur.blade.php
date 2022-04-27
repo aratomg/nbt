@@ -119,10 +119,10 @@
                                                         Prénom
                                                     </th>
                                                     <th >
-                                                        Cin
+                                                        Numero Pérmis
                                                     </th>
                                                     <th >
-                                                        Adresse
+                                                        Date Pérmis
                                                     </th>
                                                     <th >
                                                         Téléphone
@@ -164,12 +164,12 @@
                                               <input type="text" class="form-control" name="prenom" id="prenom" >
                                           </div>
                                           <div class="form-group">
-                                              <label for="cin">CIN</label>
-                                              <input type="text" class="form-control" name="cin" id="cin" required>
+                                              <label for="permis">Numero Pérmis</label>
+                                              <input type="text" class="form-control" name="permis" id="permis" required>
                                           </div>
                                           <div class="form-group">
-                                              <label for="adresse">Adresse</label>
-                                              <input type="text" class="form-control" name="adresse" id="adresse">
+                                              <label for="adresse">Date Pérmis</label>
+                                              <input type="date" class="form-control" name="date_permis" id="date_permis">
                                           </div>
                                           <div class="form-group">
                                               <label for="tel">Téléphopne</label>
@@ -212,12 +212,12 @@
                                               <input type="text" class="form-control" name="prenom" id="prenomMod" >
                                           </div>
                                           <div class="form-group">
-                                              <label for="cin">CIN</label>
-                                              <input type="text" class="form-control" name="cin" id="cinMod" required>
+                                              <label for="cin">Numero Pérmis</label>
+                                              <input type="text" class="form-control" name="permis" id="permisMod" required>
                                           </div>
                                           <div class="form-group">
-                                              <label for="adresse">Adresse</label>
-                                              <input type="text" class="form-control" name="adresse" id="adresseMod">
+                                              <label for="adresse">Date Pérmis</label>
+                                              <input type="date" class="form-control" name="date_permis" id="date_permisMod">
                                           </div>
                                           <div class="form-group">
                                               <label for="tel">Téléphopne</label>
@@ -264,8 +264,8 @@
                 "columns" : [
                     {data: 'nom'},
                     {data: 'prenom'},
-                    {data: 'cin'},
-                    {data: 'adresse'},
+                    {data: 'permis'},
+                    {data: 'date_permis'},
                     {data: 'tel'},
                     {data: 'action'}
                 ]
@@ -328,12 +328,11 @@
                     success: function(response){
                         $('#nomMod').val(response[0].nom);
                         $('#prenomMod').val(response[0].prenom);
-                        $('#cinMod').val(response[0].cin);
-                        $('#adresseMod').val(response[0].adresse);
+                        $('#permisMod').val(response[0].permis);
+                        $('#date_permisMod').val(response[0].date_permis);
                         $('#telMod').val(response[0].tel);
                         $('#id_chauffeur').val(response[0].id_chauffeur);
                         $('#modal_modif').modal('show');
-
                     }
                 });
         }else{

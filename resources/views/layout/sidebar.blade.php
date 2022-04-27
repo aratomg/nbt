@@ -182,86 +182,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item has-treeview menu-open">
-                <a href="{{ route('page.journal') }}" class="nav-link active">
 
-                    <p>
-                        Journal Caisse
-                        <!-- <i class="right fas fa-angle-left"></i> -->
-                    </p>
-                </a>
-                <!-- <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="./index.html" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v1</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./index2.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v2</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./index3.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v3</p>
-                        </a>
-                    </li>
-                </ul> -->
-            </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="{{ route('page.chauffeur') }}" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Chauffeurs
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
-                                </p>
-                            </a>
-                            <!-- <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li>
-                            </ul> -->
-                        </li>
 
-                        <li class="nav-item has-treeview">
-                            <a  class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    Camion
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('page.camion') }}" class="nav-link">
-                                        <p>liste Camion</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ Route('page.norme') }}" class="nav-link">
-                                        <p>Norme par camion</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item has-treeview">
                             <a href="{{ route('page.voyage') }}" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
@@ -316,9 +238,60 @@
                                 </li>
                             </ul> -->
                         </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ route('page.chauffeur') }}" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Chauffeurs
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                            <!-- <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="./index.html" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index3.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v3</p>
+                                    </a>
+                                </li>
+                            </ul> -->
+                        </li>
+
                         <li class="nav-item has-treeview">
                             <a  class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <i class="nav-icon fas fa-truck"></i>
+                                <p>
+                                    Camion
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('page.camion') }}" class="nav-link">
+                                        <p>liste Camion</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('page.norme') }}" class="nav-link">
+                                        <p>Norme par camion</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a  class="nav-link">
+                                <i class="nav-icon fas fa-gas-pump"></i>
                                 <p>
                                     Cartes Gasoil
                                     <i class="right fas fa-angle-left"></i>
@@ -357,6 +330,35 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ route('page.journal') }}" class="nav-link active">
+
+                                <p>
+                                    Journal Caisse
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                            <!-- <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="./index.html" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index3.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard v3</p>
+                                    </a>
+                                </li>
+                            </ul> -->
                         </li>
                         {{-- <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
@@ -421,6 +423,16 @@
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Cheque
+                                    {{-- <i class="fas fa-angle-left right"></i> --}}
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="{{ route('page.transit') }}" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Transit
                                     {{-- <i class="fas fa-angle-left right"></i> --}}
                                 </p>
                             </a>

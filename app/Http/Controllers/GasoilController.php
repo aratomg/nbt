@@ -30,7 +30,7 @@ class GasoilController extends Controller
                 $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$carte->id_carte."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$carte->id_carte."')\">Supprimer</button></div>";
                 $output['data'][] = array(
                     'libelle' => $carte->libelle,
-                    'capacite' => $carte->capacite,
+                    'plafond' => $carte->plafond,
                     'action' => $action,
                 );
             }

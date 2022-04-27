@@ -15,6 +15,8 @@ class Camion extends Model
     protected $fillable = [
         'matricule',
         'marque',
-        'modele'
+        'genre',
+        'modele',
+        'norme'
     ];
 }

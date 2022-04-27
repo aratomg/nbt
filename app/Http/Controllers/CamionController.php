@@ -33,7 +33,9 @@ class CamionController extends Controller
                 $output['data'][] = array(
                     'matricule' => $camion->matricule,
                     'marque' => $camion->marque,
+                    'genre' => $camion->genre,
                     'modele' => $camion->modele,
+                    'norme' => $camion->norme,
                     'action' => $action
                 );
             }

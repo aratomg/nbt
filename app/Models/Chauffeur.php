@@ -15,8 +15,8 @@ class Chauffeur extends Model
     protected $fillable = [
         'nom',
         'prenom',
-        'adresse',
-        'cin',
+        'permis',
+        'date_permis',
         'tel'
     ];
 }

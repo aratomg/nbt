@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportVoyage;
+use App\Imports\VoyageImport;
 use App\Models\Camion;
 use App\Models\Chauffeur;
 use App\Models\Gasoil;
+use App\Models\Transit;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VoyageController extends Controller
 {
     public function index()
     {
+        $transit = Transit::all();
         $carte = Gasoil::all();
         $camion = Camion::all();
         $chauffeur = Chauffeur::all();
         $data = array(
             'chauffeur' => $chauffeur,
             'camion' => $camion,
-            'carte' => $carte
+            'carte' => $carte,
+            'transit' => $transit
         );
         return view('page.voyage', $data);
     }
@@ -72,6 +78,13 @@ class VoyageController extends Controller
         $id = $request->input('id_voyage');
         $result = Voyage::where('id_voyage', '=', $id)->delete();
         echo json_encode($result);
+    }
+    public function import(Request $request){
+        Excel::import(new VoyageImport, $request->file('file')->store('files'));
+        return redirect()->back();
+    }
+    public function exportVoyage(Request $request){
+        return Excel::download(new ExportVoyage, 'Voyage.xlsx');
     }
 
 }
