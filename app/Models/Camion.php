@@ -17,6 +17,7 @@ class Camion extends Model
         'marque',
         'genre',
         'modele',
-        'norme'
+        'norme',
+        'type'
     ];
 }

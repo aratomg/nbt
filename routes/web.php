@@ -124,7 +124,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/liste', [RecouvrementController::class, 'list'])->name('liste_recouvrement');
             Route::get('/liste_recouvrement', [RecouvrementController::class, 'index_list'])->name('page_liste_recou');
             Route::get('/array', [RecouvrementController::class, 'liste_rec'])->name('liste_recou');
-            Route::post('/add_cheque', [Recouvrement::class, 'add_cheque'])->name('add_cheque');
+            Route::post('/add_cheq', [RecouvrementController::class, 'add_cheque'])->name('add_cheque');
         });
         Route::prefix('/norme')->group(function(){
             Route::any('/', [NormeController::class, 'index'])->name('page.norme');

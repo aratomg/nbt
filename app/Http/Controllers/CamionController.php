@@ -36,6 +36,7 @@ class CamionController extends Controller
                     'genre' => $camion->genre,
                     'modele' => $camion->modele,
                     'norme' => $camion->norme,
+                    'type' => $camion->type,
                     'action' => $action
                 );
             }

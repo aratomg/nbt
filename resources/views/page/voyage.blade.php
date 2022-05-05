@@ -255,7 +255,15 @@
                                         <div class="row">
                                             <div class="form-group col-6">
                                                 <label for="">Transit Retour</label>
-                                                <input type="text" name="retour" id="retour" class="form-control" >
+                                                <label for="">Transit</label>
+                                                <select  class="form-control select2bs4 select2-hidden-accessible" name="transit" id="transit" style="width: 100%;">
+                                                    <option value=""></option>
+                                                    @forelse ($transit as $key)
+                                                        <option value="<?php echo $key->transit?>"> <?php echo $key->transit?></option>
+                                                    @empty
+
+                                                    @endforelse
+                                                </select>
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="">Tonnage retour</label>

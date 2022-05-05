@@ -418,27 +418,13 @@
                             </ul> -->
                         </li> --}}
                         <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('page.recouvrement') }}" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Recouvrements
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('page.recouvrement') }}" class="nav-link">
-
-                                        <p>Recouvrir</p>
-                                    </a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{ route('page_liste_recou') }}" class="nav-link">
-
-                                        <p>Liste recouvrements</p>
-                                    </a>
-                                </li> --}}
-                            </ul>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{ route('page.chek') }}" class="nav-link">

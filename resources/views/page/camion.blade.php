@@ -127,6 +127,9 @@
                                             <th>
                                                 norme
                                             </th>
+                                            <th>
+                                                Type
+                                            </th>
                                             <th >
                                                 action
                                             </th>
@@ -174,6 +177,14 @@
                                   <div class="form-group">
                                     <label for="norme">Norme</label>
                                     <input type="text" class="form-control" name="norme" id="norme" >
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value=""></option>
+                                        <option value="Plateau">Plateau</option>
+                                        <option value="Sémi">Sémi</option>
+                                    </select>
                                   </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -223,6 +234,14 @@
                                     <label for="norme">Norme</label>
                                     <input type="text" class="form-control" name="norme" id="normeMod" >
                                   </div>
+                                  <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <select name="type" id="typeMod" class="form-control">
+                                        <option value=""></option>
+                                        <option value="Plateau">Plateau</option>
+                                        <option value="Sémi">Sémi</option>
+                                    </select>
+                                  </div>
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
@@ -268,6 +287,7 @@ var table;
                     {data : 'genre'},
                     {data: 'modele'},
                     {data : 'norme'},
+                    {data : 'type'},
                     {data: 'action'}
                 ]
             });
@@ -333,6 +353,7 @@ var table;
                         $('#genreMod').val(response[0].genre);
                         $('#id_camion').val(response[0].id_camion);
                         $('#normeMod').val(response[0].norme);
+                        $('#typeMod').val(response[0].type);
                         $('#modal_modif').modal('show');
 
                     }

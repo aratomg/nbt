@@ -9,6 +9,7 @@ use App\Models\Recouvrement;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
+use NumberFormatter;
 
 class FactureController extends Controller
 {
@@ -78,7 +79,7 @@ class FactureController extends Controller
         $facture = Facture::all();
         if (count($facture)>0) {
             foreach ($facture as $key) {
-                $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-success btn-flat\" onclick=\"detail('".$key->id_facture."')\">Détails</button><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_facture."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$key->id_facture."')\">Supprimer</button></div>";
+                $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-success btn-flat\" onclick=\"detail('".$key->id_facture."')\">Détails</button><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_facture."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$key->id_facture."')\">Supprimer</button><a href='".route('print_facture', [$key->id_facture])."' target='_blank'>Imprimer</a></div>";
                 $output['data'][] = array(
                     'num_fac' => $key->num_fac,
                     'date_fact' =>utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_fact)))),
@@ -157,16 +158,16 @@ class FactureController extends Controller
 
     public function facture($id, Request $request)
     {
-        $result = Facture::where('id_facture', '=', $id)->get();
+        $format = NumberFormatter::create('fr_FR', NumberFormatter::SPELLOUT);
+        $format->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+        $format->setAttribute(NumberFormatter::ROUNDING_MODE, NumberFormatter::ROUND_HALFUP);
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
+        $result = Facture::where('id_facture', '=', $id)->first();
         $avoir =  Avoir::join('voyage', 'voyage.id_voyage', '=', 'avoir.id_voyage')
         ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')
         ->join('detail', 'detail.id_voyage', '=', 'avoir.id_voyage')
         ->where('id_facture', '=', $id)->get();
-        // $chek = Chek::where('id_facture', '=', $id)->get();
-        // if (count($chek) <= 0) {
-        //     $chek = array();
-        //     $chek[]['numero'] = null;
-        // }
+        $result->lettre = strtoupper($format->format($result->total_final));
         $data = array(
             'avoir' => $avoir,
             'facture' => $result,

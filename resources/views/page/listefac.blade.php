@@ -729,7 +729,7 @@
                         // $('#date_cheque').val(response.chek[0].date_chek);
                         // $('#montant').val(response.chek[0].montant_chek);
                         for (let i = 0; i < response.avoir.length; i++) {
-                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" disabled></div></td><td>"
+                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" ></div></td><td>"
                                  +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'><button type=\"button\" class=\"btn btn-danger btn-flat badge-delete\" >Supprimer</button></td></tr>"
                             );
                         }
@@ -772,7 +772,7 @@
                         // $('#date_cheque').val(response.chek[0].date_chek);
                         // $('#montant').val(response.chek[0].montant_chek);
                         for (let i = 0; i < response.avoir.length; i++) {
-                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" ></div></td><td>"
+                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" disabled ></div></td><td>"
                                  +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'></td></tr>"
                             );
                         }

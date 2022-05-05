@@ -21,7 +21,7 @@ class RecouvrementController extends Controller
     public function list()
     {
         setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
-        $recouvre = Facture::leftjoin('recouvrement', 'recouvrement.id_facture', '=', 'facture.id_facture')->select('facture.id_facture','facture.type' ,'facture.client', 'facture.date_echeance', 'facture.total_final','facture.num_fac')->get();
+        $recouvre = Facture::leftjoin('recouvrement', 'recouvrement.id_facture', '=', 'facture.id_facture')->select('facture.id_facture','facture.type' ,'facture.client', 'facture.date_echeance', 'facture.total_final','facture.num_fac', 'recouvrement.date_payement', 'recouvrement.montant_payement')->get();
         if (count($recouvre)>0) {
             foreach ($recouvre as $key) {
                 $action = "<button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_facture."')\">Recouvrir</button>";

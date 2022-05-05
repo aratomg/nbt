@@ -105,7 +105,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Liste des factures Non Payé</h3>
+                            <h3 class="card-title">Liste Recouvrement</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
@@ -160,7 +160,7 @@
                                   @csrf
                                     <div class="form-group">
                                         <label for="cin">Date Recouvrement</label>
-                                        <input type="hidden" id="id_recouvrement" name="id_recouvrement">
+                                        <input type="hidden" id="id_facture" name="id_facture">
                                         <input type="date" class="form-control" name="date_payement" id="date_payement" >
                                     </div>
                                     <div class="form-group ">
@@ -316,7 +316,7 @@
             },
             success : function(response){
                 $.ajax({
-                    url : "{{ route('add_chek') }}",
+                    url : "{{ route('add_cheque') }}",
                     method : 'POST',
                     dataType : 'json',
                     data : {
