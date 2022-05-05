@@ -54,10 +54,15 @@ class FactureController extends Controller
         $facture = Facture::create($data);
         foreach ($voyage as $key) {
             $donne = array(
-                'id_voyage' => $key,
+                'id_voyage' => $key['id_voyage'],
                 'id_facture' => $facture->id_facture
             );
-            Avoir::create($donne);
+            $avoir = Avoir::create($donne);
+            if($avoir->id_avoir){
+                $voyage = Voyage::find($key['id_voyage']);
+                $voyage->bl = $key['num_bl'];
+                $voyage->save();
+            }
         }
         echo json_encode($facture);
     }
@@ -91,15 +96,15 @@ class FactureController extends Controller
         ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')
         ->join('detail', 'detail.id_voyage', '=', 'avoir.id_voyage')
         ->where('id_facture', '=', $id)->get();
-        $chek = Chek::where('id_facture', '=', $id)->get();
-        if (count($chek) <= 0) {
-            $chek = array();
-            $chek[]['numero'] = null;
-        }
+        // $chek = Chek::where('id_facture', '=', $id)->get();
+        // if (count($chek) <= 0) {
+        //     $chek = array();
+        //     $chek[]['numero'] = null;
+        // }
         $data = array(
                 'avoir' => $avoir,
                 'facture' => $result,
-                'chek' => $chek
+                // 'chek' => $chek
             );
         echo  json_encode($data);
     }

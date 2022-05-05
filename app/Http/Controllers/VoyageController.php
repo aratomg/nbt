@@ -92,5 +92,9 @@ class VoyageController extends Controller
     public function exportVoyage(Request $request){
         return Excel::download(new ExportVoyage, 'Voyage.xlsx');
     }
+    public function add_bl(Request $request)
+    {
+
+    }
 
 }

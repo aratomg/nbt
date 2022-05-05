@@ -221,6 +221,9 @@
                                                     N° Dossier
                                                 </th>
                                                 <th>
+
+                                                </th>
+                                                <th>
                                                     Nombre
                                                 </th>
                                                 <th>Prix unitaire</th>
@@ -486,7 +489,9 @@
         var numero = $('#numero').val();
         var montant = $('#montant').val();
         $("#list_voyage_facture > tbody > tr").each(function() {
-            voyage.push($(this).find('td:eq(0)').text());
+            id_v = $(this).find('td:eq(0)').text();
+            num_bl =$(this).find('td:eq(1)').find('input').val();
+            voyage.push({'id_voyage': id_v, 'num_bl': num_bl });
         })
 
             $.ajax({
@@ -526,29 +531,31 @@
                             }
                         });
                     }
-                    if ($('#type_p').val() === 'Cheque') {
-                        $.ajax({
-                            url : "{{ route('add_chek') }}",
-                            method : 'POST',
-                            dataType : 'json',
-                            data : {
-                                _token : '{{ csrf_token() }}',
-                                id_facture : response.id_facture,
-                                date_chek : date_cheque,
-                                montant_chek : montant,
-                                numero : numero
-                            },
-                            success : function(response){
-                            }
-                        });
-                    }
-                    Toast.fire({
-                        icon : 'success',
-                        title : 'Enregistrer avec succes'
-                    });
-                    table.api().ajax.reload();
                 }
-            });
+            })
+            //         if ($('#type_p').val() === 'Cheque') {
+            //             $.ajax({
+            //                 url : "{{ route('add_chek') }}",
+            //                 method : 'POST',
+            //                 dataType : 'json',
+            //                 data : {
+            //                     _token : '{{ csrf_token() }}',
+            //                     id_facture : response.id_facture,
+            //                     date_chek : date_cheque,
+            //                     montant_chek : montant,
+            //                     numero : numero
+            //                 },
+            //                 success : function(response){
+            //                 }
+            //             });
+            //         }
+            //         Toast.fire({
+            //             icon : 'success',
+            //             title : 'Enregistrer avec succes'
+            //         });
+            //         table.api().ajax.reload();
+            //     }
+            // });
 
     })
     $('#tva_client').on('change', function(){
