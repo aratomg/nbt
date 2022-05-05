@@ -316,6 +316,184 @@
                         <!-- /.modal-dialog -->
                     </div>
 
+                    <div class="modal fade show" id="modal_detail" style="display: none; padding-right: 14px;" aria-modal="true">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            {{-- <div class="modal-header">
+                                <h5 class="m-0 text-dark">
+                                    <Cite>Ajouter un Chauffeur</Cite>
+                                </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                              </button>
+                            </div> --}}
+                            <div class="modal-body">
+                              <form id="modif_facture">
+                                  @csrf
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">N° facture</label>
+                                            <input type="hidden" name="id_facture" id="id_facture" disabled>
+                                            <input type="text" name="num_fac" id="num_facD" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="">Type</label>
+                                        <select name="type" id="typeD" class="form-control" disabled>
+                                            <option value=""></option>
+                                            <option value="import">Import</option>
+                                            <option value="export">Export</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">Client</label>
+                                            <input type="text" class="form-control" name="client" id="clientD" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="">Nif</label>
+                                        <input type="text" class="form-control" name="nif" id="nifD" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="">Stat</label>
+                                        <input type="text" class="form-control" name="stat" id="statD" disabled>
+                                    </div>
+                                </div>
+                                {{-- <div class="row">
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#voyage" >Ajouter Voyage</button>
+                                    </div>
+                                </div> --}}
+                                <div class="row">
+                                    <table id="list_voyage_facture" class="table table-hover text-nowrap">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="hidden">
+
+                                                </th>
+                                                <th>
+                                                    N° Dossier
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                                <th>
+                                                    Nombre
+                                                </th>
+                                                <th>Prix unitaire</th>
+                                                <th>
+                                                    Montant
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label for="" class="col-form-label">Toamasina</label>
+                                            <div class="col-sm-3">
+                                                <input type="date" class="form-control" name="date_fact" id="date_factD" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group row">
+                                            <label for="" class="col-form-label">Total</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="total" id="totalD" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8" >
+                                        <div class="form-group row">
+                                            <label for="Mode de payement">Mode de payement</label>
+                                            <select name="mode" id="modeD" class="form-control col-sm-3" required disabled>
+                                                <option value=""></option>
+                                                <option value="comptant">Comptant</option>
+                                                <option value="echeance">Echeance</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group row" id="echeance_">
+                                            <label for="" class="col-form-label">Echeance</label>
+                                            <div class="col-sm-3">
+                                                <input type="date" class="form-control" name="date_echeance" id="date_echeanceD" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group row">
+                                            <label for="" class="col-form-label">TVA</label>
+                                            <div class="col-sm-3">
+                                                <input type="number" class="form-control" name="tva_client" id="tva_clientD" min="0" step="10" disabled>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="tva" id="tvaD" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label for="Type de payement">Type de payement</label>
+                                            <select name="type_p" id="type_pD" class="form-control col-sm-3" disabled>
+                                                <option value=""></option>
+                                                <option value="Espece">Espece</option>
+                                                <option value="Cheque">Cheque</option>
+                                            </select>
+                                        </div>
+                                        <div id="cq">
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Date Cheque</label>
+                                                <div class="col-sm-3">
+                                                    <input type="date" class="form-control" name="date_cheque" id="date_chequeD" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">N°</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" name="numero" id="numeroD" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-form-label">Montant</label>
+                                                <div class="col-sm-3">
+                                                    <input type="number" class="form-control" name="montant" id="montantD"  disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group row">
+                                            <label for="" class="col-form-label"><b>Total</b></label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="total_final" id="total_finalD" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                            </form>
+                            </div>
+                        </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
                     <!--modal modif -->
                     <div class="modal fade show" id="voyage" style="display: none; padding-right: 14px;" aria-modal="true">
                         <div class="modal-dialog modal-xl">
@@ -551,11 +729,54 @@
                         // $('#date_cheque').val(response.chek[0].date_chek);
                         // $('#montant').val(response.chek[0].montant_chek);
                         for (let i = 0; i < response.avoir.length; i++) {
-                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" ></div></td><td>"
+                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" disabled></div></td><td>"
                                  +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'><button type=\"button\" class=\"btn btn-danger btn-flat badge-delete\" >Supprimer</button></td></tr>"
                             );
                         }
                         $('#modal_modif').modal('show');
+
+                    }
+                });
+        }else{
+            alert('Il y a une erreur! Veuillez actualiser la page s\'il vous plaît');
+        }
+    }
+    function detail(code){
+        if(code){
+            $.ajax({
+                    url:"{{ route('get_facture') }}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        _token : '{{ csrf_token() }}',
+                        id_facture : code
+                    },
+                    success: function(response){
+                        $('#num_facD').val(response.facture[0].num_fac);
+                        $('#clientD').val(response.facture[0].client);
+                        $('#typeD').val(response.facture[0].type);
+                        $('#nifD').val(response.facture[0].nif);
+                        $('#statD').val(response.facture[0].stat);
+                        $('#tva_clientD').val(response.facture[0].tva*100/response.facture[0].total);
+                        $("#totalD").val(response.facture[0].total);
+                        $('#tvaD').val(response.facture[0].tva);
+                        $('#total_finalD').val(response.facture[0].total_final);
+                        $('#date_factD').val(response.facture[0].date_fact);
+                        $('#date_echeanceD').val(response.facture[0].date_echeance);
+                        $('#id_factureD').val(response.facture[0].id_facture);
+                        // if (response.chek[0].numero ) {
+                        //     $('#type_p').val('Cheque');
+                        //     $('#cq').show();
+                        // }
+                        // $('#numero').val(response.chek[0].numero);
+                        // $('#date_cheque').val(response.chek[0].date_chek);
+                        // $('#montant').val(response.chek[0].montant_chek);
+                        for (let i = 0; i < response.avoir.length; i++) {
+                            $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+response.avoir[i].id_voyage +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' value="+response.avoir[i].bl+" ></div></td><td>"
+                                 +" DU "+response.avoir[i].date_voyage + " Cam N° "+ response.avoir[i].matricule  +"</td><td>" + response.avoir[i].nombre + "</td><td>"+response.avoir[i].prix_unitaire +"</td><td>"+response.avoir[i].montant + "</td><td style='text-align:center !important;'></td></tr>"
+                            );
+                        }
+                        $('#modal_detail').modal('show');
 
                     }
                 });

@@ -12,6 +12,7 @@ class ConsoGasoilController extends Controller
 {
     public function index(Request $request)
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $carte = Gasoil::orderBy('id_carte', 'Desc')->get();
         $defaut = $request->input('id_carte') == null ? Gasoil::max('id_carte') : $request->input('id_carte');
         $carte_gasoil = Gasoil::where('id_carte', '=', $defaut)->get();
@@ -32,6 +33,7 @@ class ConsoGasoilController extends Controller
     }
     public function Carte(Request $request)
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $carte = Gasoil::orderBy('id_carte', 'Desc')->get();
         $defaut = $request->input('id_carte') == null ? Gasoil::max('id_carte') : $request->input('id_carte');
         $carte_gasoil = Gasoil::where('id_carte', '=', $defaut)->get();

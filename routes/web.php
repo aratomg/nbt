@@ -21,6 +21,7 @@ use App\Http\Controllers\TransitController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Middleware\AppAuth;
 use App\Models\Chauffeur;
+use App\Models\Recouvrement;
 use App\Models\Transit;
 use App\Models\Voyage;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,7 @@ Route::middleware(['auth'])->group(function(){
             Route::post('/get', [FactureController::class, 'get_facture'])->name('get_facture');
             Route::post('/update', [FactureController::class, 'update'])->name('update_facture');
             Route::post('/delete', [FactureController::class, 'delete'])->name('delete_facture');
+            Route::get('/print/{id}', [FactureController::class, 'facture'])->name('print_facture');
         });
         Route::prefix('/revouvrement')->group(function(){
             Route::get('/', [RecouvrementController::class, 'index'])->name('page.recouvrement');
@@ -122,6 +124,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/liste', [RecouvrementController::class, 'list'])->name('liste_recouvrement');
             Route::get('/liste_recouvrement', [RecouvrementController::class, 'index_list'])->name('page_liste_recou');
             Route::get('/array', [RecouvrementController::class, 'liste_rec'])->name('liste_recou');
+            Route::post('/add_cheque', [Recouvrement::class, 'add_cheque'])->name('add_cheque');
         });
         Route::prefix('/norme')->group(function(){
             Route::any('/', [NormeController::class, 'index'])->name('page.norme');

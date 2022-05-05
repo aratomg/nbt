@@ -8,6 +8,7 @@ use App\Models\Facture;
 use App\Models\Recouvrement;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
+use Mpdf\Mpdf;
 
 class FactureController extends Controller
 {
@@ -17,6 +18,7 @@ class FactureController extends Controller
     }
     public function list()
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $voyage = Voyage::join('detail', 'detail.id_voyage', '=', 'voyage.id_voyage')
         ->leftjoin('avoir', 'voyage.id_voyage', '=', 'avoir.id_voyage')
         ->join('depense', 'depense.id_voyage','=','voyage.id_voyage')
@@ -24,7 +26,7 @@ class FactureController extends Controller
         if (count($voyage)>0) {
             foreach ($voyage as $key ) {
                 $output['data'][] = array(
-                    'date_voyage' => $key->date_voyage,
+                    'date_voyage' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))),
                     'transit' => $key->transit,
                     'client'=> $key->client,
                     'camion' => $key->matricule,
@@ -72,13 +74,14 @@ class FactureController extends Controller
     }
     public function liste_facture()
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $facture = Facture::all();
         if (count($facture)>0) {
             foreach ($facture as $key) {
-                $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_facture."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$key->id_facture."')\">Supprimer</button></div>";
+                $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-success btn-flat\" onclick=\"detail('".$key->id_facture."')\">Détails</button><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_facture."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$key->id_facture."')\">Supprimer</button></div>";
                 $output['data'][] = array(
                     'num_fac' => $key->num_fac,
-                    'date_fact' =>$key->date_fact,
+                    'date_fact' =>utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_fact)))),
                     'client' => $key->client,
                     'action' => $action,
                 );
@@ -150,5 +153,28 @@ class FactureController extends Controller
         $result = Facture::where('id_facture', '=', $id)->delete();
         Recouvrement::where('id_facture', '=', $id)->delete();
         echo json_encode($result);
+    }
+
+    public function facture($id, Request $request)
+    {
+        $result = Facture::where('id_facture', '=', $id)->get();
+        $avoir =  Avoir::join('voyage', 'voyage.id_voyage', '=', 'avoir.id_voyage')
+        ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')
+        ->join('detail', 'detail.id_voyage', '=', 'avoir.id_voyage')
+        ->where('id_facture', '=', $id)->get();
+        // $chek = Chek::where('id_facture', '=', $id)->get();
+        // if (count($chek) <= 0) {
+        //     $chek = array();
+        //     $chek[]['numero'] = null;
+        // }
+        $data = array(
+            'avoir' => $avoir,
+            'facture' => $result,
+            // 'chek' => $chek
+        );
+        $mpdf = new Mpdf(['orientation' => 'P', 'format' => 'A4']);
+        $html = view('page.report', $data)->render();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
 }

@@ -160,7 +160,7 @@
                                   @csrf
                                     <div class="form-group">
                                         <label for="cin">Date Recouvrement</label>
-                                        <input type="hidden" id="id_facture" name="id_facture">
+                                        <input type="hidden" id="id_recouvrement" name="id_recouvrement">
                                         <input type="date" class="form-control" name="date_payement" id="date_payement" >
                                     </div>
                                     <div class="form-group ">
@@ -180,7 +180,7 @@
                                   <div id="cq">
                                     <div class="form-group">
                                         <label for="" class="col-form-label">Date Cheque</label>
-                                        <input type="date" class="form-control" name="date_chek" id="date_chek" >
+                                        <input type="date" class="form-control" name="date_cheque" id="date_chek" >
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-form-label">N°</label>
@@ -263,13 +263,24 @@
                 processData : false,
                 dataType : 'json',
                 success : function(response){
-                    $("#payer")[0].reset();
-                    $('#modal_modif').modal('hide');
-                    Toast.fire({
-                        icon : 'success',
-                        title : 'Enregistrer avec succes'
+                    $.ajax({
+                        url : "{{ route('add_cheque') }}",
+                        data : new FormData(this),
+                        type : "POST",
+                        contentType : false,
+                        cache : false,
+                        processData : false,
+                        dataType : 'json',
+                        success : function(response){
+                            $("#payer")[0].reset();
+                            $('#modal_modif').modal('hide');
+                            Toast.fire({
+                                icon : 'success',
+                                title : 'Enregistrer avec succes'
+                            });
+                            table.api().ajax.reload();
+                        }
                     });
-                    table.api().ajax.reload();
                 }
             });
             return false;

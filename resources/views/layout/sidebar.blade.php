@@ -162,9 +162,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="#" class="brand-link">
                 <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-                <span class="brand-text font-weight-light"><sub>Transporteur</sub> <sup>Nambinintsoa</sup></span>
+                <span class="brand-text font-weight-light"><sup>Nambinintsoa</sup> <sub>Transport</sub></span>
             </a>
 
             <!-- Sidebar -->
@@ -188,7 +188,7 @@
 
                         <li class="nav-item has-treeview">
                             <a href="{{ route('page.voyage') }}" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fas fa-plane"></i>
                                 <p>
                                     Voyages
                                     <!-- <i class="fas fa-angle-left right"></i>
@@ -240,9 +240,9 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="{{ route('page.chauffeur') }}" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item has-treeview">
+                            <a href="{{ route('page.chauffeur') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Chauffeurs
                                     <!-- <i class="right fas fa-angle-left"></i> -->
@@ -271,7 +271,7 @@
                         </li>
                         <li class="nav-item has-treeview">
                             <a  class="nav-link" href="{{ route('page.pneu') }}">
-                                <i class="nav-icon fas fa-truck"></i>
+                                <i class="nav-icon fas fa-ring"></i>
                                 <p>
                                     Pneu
                                     {{-- <i class="right fas fa-angle-left"></i> --}}
@@ -301,7 +301,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('page.camion') }}" class="nav-link">
-                                        <p>liste Camion</p>
+                                        <p>Liste Camion</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -322,7 +322,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('page.gasoil') }}" class="nav-link">
-                                        <p>liste Carte</p>
+                                        <p>Liste Carte</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -353,12 +353,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="{{ route('page.journal') }}" class="nav-link active">
+                        <li class="nav-item has-treeview">
+                            <a href="{{ route('page.journal') }}" class="nav-link">
 
+                                <i class="nav-icon fas fa-money-check"></i>
                                 <p>
                                     Journal Caisse
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
                             <!-- <ul class="nav nav-treeview">

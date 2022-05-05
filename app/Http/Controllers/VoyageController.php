@@ -41,12 +41,13 @@ class VoyageController extends Controller
     }
     public function list()
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $voyage = Voyage::join('depense', 'depense.id_voyage','=','voyage.id_voyage')->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')->get();
         if (count($voyage)>0) {
             foreach ($voyage as $key ) {
                 $action = "<div class=\"btn-group\"><button type=\"button\" class=\"btn btn-info btn-flat\" onclick=\"modif('".$key->id_voyage."')\">Modifier</button><button type=\"button\" class=\"btn btn-danger btn-flat\" onclick=\"supprimer('".$key->id_voyage."')\">Supprimer</button></div>";
                 $output['data'][] = array(
-                    'date_voyage' => $key->date_voyage,
+                    'date_voyage' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))),
                     'transit' => $key->transit,
                     // 'client'=> $key->client,
                     'camion' => $key->matricule,

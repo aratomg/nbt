@@ -13,7 +13,7 @@
 
 <body>
     <form action="{{ route('page.login.check') }}" method="POST" autocomplete="off">
-        <h1>NAMBINITSOA</h1>
+        <h1>NAMBININTSOA</h1>
         @csrf
         <div class="inset">
             <p>
@@ -27,7 +27,7 @@
         </div>
         <p class="p-container">
             <span>Mot de Passe oublier ?</span>
-            <input type="submit" name="go" id="go" value="Log in">
+            <input type="submit" name="go" id="go" value="Se connecter">
         </p>
     </form>
 </body>

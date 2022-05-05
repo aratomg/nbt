@@ -36,7 +36,7 @@
                     <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add" >Ajouter</button>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <!-- <div class="col-lg-3 col-6">
                     <form action="{{ route('import-voyage') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-4">
@@ -48,7 +48,7 @@
                         <button class="btn btn-primary">Import Users</button>
                         <a class="btn btn-success" href="{{ route('export-voyage') }}">Export Voyage</a>
                     </form>
-                </div>
+                </div> -->
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                 </div>

@@ -140,7 +140,7 @@
                                         @forelse ($voyage as $key)
                                             <tr>
                                                 <td>
-                                                    {{ $key->date_voyage }}
+                                                    {{ utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))) }}
                                                 </td>
                                                 <td>
                                                     {{ $key->matricule }} {{ $key->client }}

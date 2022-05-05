@@ -13,6 +13,8 @@ class NormeController extends Controller
 {
     public function index(Request $request)
     {
+
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $annee = $request->input('annee') == null ? Carbon::parse(Voyage::max('date_voyage'))->format('y') : $request->input('annee');
         $mois = $request->input('mois') == null ? Carbon::parse(Voyage::max('date_voyage'))->format('m') : $request->input('mois');
         $liste_annee = Db::table('voyage')->select(DB::raw('DISTINCT YEAR(date_voyage) as annee'))->get();

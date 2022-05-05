@@ -24,6 +24,7 @@ class JournalController extends Controller
     }
     public function liste(Request $request)
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $annee = $request->input('annee') == null ? Carbon::parse(Voyage::max('date_voyage'))->format('y') : $request->input('annee');
         $voyage = Voyage::join('depense', 'depense.id_voyage', '=', 'voyage.id_voyage')
         ->join('chauffeur', 'chauffeur.id_chauffeur', '=', 'voyage.id_chauffeur')
@@ -39,7 +40,7 @@ class JournalController extends Controller
         $autre = Autre::whereBetween('date_autre', [$annee.'-1-01', $annee.'-12-31'])->get();
         foreach ($voyage as $key) {
             $journal['data'][] = array(
-                'date' => $key->date_voyage,
+                'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))),
                 'designation' => 'vatsy '.$key->nom,
                 'camion' => $key->vatsy,
                 'chek' => '',
@@ -48,7 +49,7 @@ class JournalController extends Controller
         }
         foreach ($voyage2 as $key) {
             $journal['data'][] = array(
-                'date' => $key->date_voyage,
+                'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))),
                 'designation' => 'Piece Camion '.$key->matricule,
                 'camion' => $key->piece,
                 'chek' => '',
@@ -57,7 +58,7 @@ class JournalController extends Controller
         }
         foreach ($voyage1 as $key) {
             $journal['data'][] = array(
-                'date' => $key->date_voyage,
+                'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_voyage)))),
                 'designation' => 'Pneu',
                 'camion' => $key->prix_pneu,
                 'chek' => '',
@@ -66,7 +67,7 @@ class JournalController extends Controller
         }
         foreach ($chek as $key) {
             $journal['data'][] = array(
-                'date' => $key->date_chek,
+                'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_chek)))),
                 'designation' => 'Chek',
                 'chek' => $key->montant_chek,
                 'camion' => '',
@@ -75,7 +76,7 @@ class JournalController extends Controller
         }
         foreach ($autre as $key) {
             $journal['data'][] = array(
-                'date' => $key->date_autre,
+                'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_autre)))),
                 'designation' => $key->designation,
                 'autre' => $key->montant,
                 'chek' => '',

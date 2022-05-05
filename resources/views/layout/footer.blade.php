@@ -67,6 +67,19 @@ $.widget.bridge('uibutton', $.ui.button)
       theme: 'bootstrap4'
     })
 
+    $(function(){
+        let url = window.location.href;
+        $("a.nav-link").each(function (index, element) {
+            if($(this).attr('href') == url){
+                $(this).addClass('active');
+                if($(this).parents('li').hasClass('has-treeview')){
+                    $(this).parents('li').addClass('menu-open')
+                }
+            }
+        })
+    });
+
+
 </script>
 @yield('script')
 </body>

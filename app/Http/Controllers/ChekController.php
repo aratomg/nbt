@@ -19,13 +19,14 @@ class ChekController extends Controller
     }
     public function liste()
     {
+        setlocale(LC_ALL, 'fr_FR.utf8', 'fra');
         $chek = Chek::orderBy('date_chek', 'Desc')->get();
         if(count($chek)>0){
             foreach ($chek as $key) {
                 $output['data'][] = array(
                     'numero' => $key->numero,
                     'designation' => $key->designation,
-                    'date' => $key->date_chek,
+                    'date' => utf8_decode(utf8_encode(strftime('%d %b %Y', strtotime($key->date_chek)))),
                     'montant' => $key->montant_chek
                 );
             }
