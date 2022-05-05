@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Autre;
+use App\Models\Autre_conso;
 use App\Models\Gasoil;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
@@ -47,5 +49,10 @@ class ConsoGasoilController extends Controller
                 'voyage' => $voyage
             );
         return view('page.ConsoGasoil', $data);
+    }
+    public function add_autre_conso(Request $request)
+    {
+        $data = $request->input();
+        echo json_encode(Autre_conso::create($data));
     }
 }

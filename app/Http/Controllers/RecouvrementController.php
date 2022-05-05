@@ -28,7 +28,9 @@ class RecouvrementController extends Controller
                     'type' => $key->type.' '.$key->client,
                     'date' => $key->date_echeance,
                     'montant' => $key->total_final,
-                    'action' => $action,
+                    'date1' => $key->date_payement,
+                    'montant1' => $key->montant_payement,
+                    'action' => ($key->montant_payement == null ? $action : '')
                 );
             }
         }else{

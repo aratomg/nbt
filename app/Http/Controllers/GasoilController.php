@@ -9,7 +9,11 @@ class GasoilController extends Controller
 {
     public function index()
     {
-        return view('page.gasoil');
+        $carte = Gasoil::all();
+        $data = array(
+            'carte' => $carte
+        );
+        return view('page.gasoil', $data);
     }
     public function add(Request $request)
     {

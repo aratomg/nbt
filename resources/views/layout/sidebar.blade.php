@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="{{ str_replace('index.php', '', url('/')) }}/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ str_replace('index.php', '', url('/')) }}/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="{{ str_replace('index.php', '', url('/')) }}/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ str_replace('index.php', '', url('/')) }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -267,7 +269,27 @@
                                 </li>
                             </ul> -->
                         </li>
-
+                        <li class="nav-item has-treeview">
+                            <a  class="nav-link" href="{{ route('page.pneu') }}">
+                                <i class="nav-icon fas fa-truck"></i>
+                                <p>
+                                    Pneu
+                                    {{-- <i class="right fas fa-angle-left"></i> --}}
+                                </p>
+                            </a>
+                            {{-- <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('page.camion') }}" class="nav-link">
+                                        <p>liste Camion</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ Route('page.norme') }}" class="nav-link">
+                                        <p>Norme par camion</p>
+                                    </a>
+                                </li>
+                            </ul> --}}
+                        </li>
                         <li class="nav-item has-treeview">
                             <a  class="nav-link">
                                 <i class="nav-icon fas fa-truck"></i>
@@ -410,12 +432,12 @@
                                         <p>Recouvrir</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('page_liste_recou') }}" class="nav-link">
 
                                         <p>Liste recouvrements</p>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">

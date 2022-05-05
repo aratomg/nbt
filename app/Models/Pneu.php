@@ -9,11 +9,13 @@ class Pneu extends Model
 {
     use HasFactory;
     protected $table = "pneu";
-    protected $primairyKey = "id_table";
+    protected $primairyKey = "id_pneu";
     public $timestamps = false;
     protected $fillable = [
-        'designation',
-        'date_pneu',
+        'numero',
+        'reference',
+        'marque',
         'prix',
+        'date'
     ];
 }

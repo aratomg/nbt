@@ -9,7 +9,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        <Cite>Carte Gasoil</Cite>
+                        <Cite>Pneu</Cite>
                     </h1>
                 </div>
                 <!-- /.col -->
@@ -49,7 +49,6 @@
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    <button type="button" class="btn btn-block btn-secondary btn-flat" data-toggle="modal" data-target="#modal_add_conso" >Consommation par Autre</button>
                     <!-- small box -->
                     <!-- <div class="small-box bg-success">
                         <div class="inner">
@@ -105,22 +104,28 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Liste des Cartes gasoil</h3>
+                            <h3 class="card-title">Liste des Pneu</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div>
-                                <table id="list_carte" class="table table-hover text-nowrap">
+                                <table id="list_pneu" class="table table-hover text-nowrap">
                                     <thead>
                                         <tr role="row">
                                             <th >
-                                                Libelle
+                                                Numero
                                             </th>
                                             <th >
-                                                Plafond
+                                                Reference
+                                            </th>
+                                            <th>
+                                                Marque
+                                            </th>
+                                            <th>
+                                                Prix
                                             </th>
                                             <th >
-                                                action
+                                                Action
                                             </th>
                                         </tr>
                                     </thead>
@@ -145,20 +150,28 @@
                               </button>
                             </div> --}}
                             <div class="modal-body">
-                              <form id="add_carte">
+                              <form id="add_pneu">
                                   @csrf
                                   <div class="form-group">
-                                      <label for="prenom">Libelle</label>
-                                      <input type="text" class="form-control" name="libelle" id="libelle" required>
+                                      <label for="dte_pneu">Date Achat</label>
+                                      <input type="date" name="date_pneu" id="date_pneu" class="form-control">
                                   </div>
                                   <div class="form-group">
-                                      <label for="plafond">Plafond</label>
-                                      <input type="number" class="form-control" name="plafond" id="plafond" min="20">
+                                      <label for="numero">numero</label>
+                                      <input type="text" class="form-control" name="numero" id="numero" required>
                                   </div>
-                                  {{-- <div class="form-group">
-                                      <label for="cin">Capacite</label>
-                                      <input type="text" class="form-control" name="capacite" id="capacite" >
-                                  </div> --}}
+                                  <div class="form-group">
+                                      <label for="reference">Reference</label>
+                                      <input type="text" class="form-control" name="reference" id="reference" min="20">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="marque">Marque</label>
+                                      <input type="text" class="form-control" name="marque" id="marque" >
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="prix">Prix</label>
+                                    <input type="text" name="prix_pneu" id="prix_pneu" class="form-control" required>
+                                  </div>
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
@@ -184,16 +197,28 @@
                               </button>
                             </div> --}}
                             <div class="modal-body">
-                              <form id="modif_carte">
+                              <form id="modif_pneu">
                                   @csrf
-                                  <input type="hidden" name="id_carte" id="id_carte">
+                                  <input type="hidden" name="id_pneu" id="id_pneu">
                                   <div class="form-group">
-                                    <label for="cin">Libelle</label>
-                                    <input type="text" class="form-control" name="libelle" id="libelleMod" >
+                                    <label for="dte_pneu">Date Achat</label>
+                                    <input type="date" name="date_pneu" id="date_pneuMod" class="form-control">
                                   </div>
                                   <div class="form-group">
-                                    <label for="plafond">Plafond</label>
-                                    <input type="number" class="form-control" name="plafond" min="20" id="plafondMod">
+                                    <label for="numero">Numero</label>
+                                    <input type="text" class="form-control" name="numero" id="numeroMod" >
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="reference">Reference</label>
+                                    <input type="text" class="form-control" name="reference" id="referenceMod">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="marque">Marque</label>
+                                    <input type="text" class="form-control" name="marque" id="marqueMod">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prix">Prix</label>
+                                    <input type="text" name="prix_pneu" id="prixMod" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -206,61 +231,6 @@
                         </div>
                         <!-- /.modal-dialog -->
                       </div>
-
-                                          <!--modal ajout autre conso -->
-                    <div class="modal fade show" id="modal_add_conso" style="display: none; padding-right: 14px;" aria-modal="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            {{-- <div class="modal-header">
-                                <h5 class="m-0 text-dark">
-                                    <Cite>Ajouter un Chauffeur</Cite>
-                                </h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                              </button>
-                            </div> --}}
-                            <div class="modal-body">
-                              <form id="add_conso">
-                                  @csrf
-                                  <div class="form-group">
-                                      <label for="prenom">Date</label>
-                                      <input type="date" class="form-control" name="date_conso" required>
-                                  </div>
-                                  <div class="form-group">
-                                    <label>Carte Gasoil</label>
-                                    <select name="id_carte" id="id_carte" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                      <option></option>
-                                      @forelse ($carte as $key)
-                                          <option value="{{ $key->id_carte }}"> {{ $key->libelle }}</option>
-                                      @empty
-
-                                      @endforelse
-                                    </select>
-                                  </div>
-
-                                  <div class="form-group">
-                                      <label for="desigantion">Désignation</label>
-                                      <input type="text" class="form-control" name="designation" >
-                                  </div>
-                                  <div class="form-group">
-                                      <label for="prix_gasoil">Prix litre gasoil</label>
-                                      <input type="text" class="form-control" name="prix_gasoil">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="gasoil_litre">Gasoil en litre</label>
-                                    <input type="text" class="form-control" name="gasoil_litre" id="gasoil_litre">
-                                  </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
-                              <button type="submit" class="btn btn-secondary btn-flat">Ajouter</button>
-                            </form>
-                            </div>
-                          </div>
-                          <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
                 </section>
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -281,23 +251,25 @@
     <script>
         var table;
         $(document).ready(function(){
-            table = $('#list_carte').dataTable({
+            table = $('#list_pneu').dataTable({
                 "order" : [],
                 "ajax" : {
-                    "url" : "{{ route('liste_carte') }}",
+                    "url" : "{{ route('liste_pneu') }}",
                     "dataScr" : "data"
                 },
                 "columns" : [
-                    {data: 'libelle'},
-                    {data: 'plafond'},
+                    {data: 'numero'},
+                    {data: 'reference'},
+                    {data: 'marque'},
+                    {data: 'prix'},
                     {data: 'action'}
                 ]
             });
         })
-        $('#add_carte').unbind('submit').bind('submit', function() {
+        $('#add_pneu').unbind('submit').bind('submit', function() {
         var form = new FormData(this);
             $.ajax({
-                url : "{{ route('add_carte') }}",
+                url : "{{ route('add_pneu') }}",
                 data : new FormData(this),
                 type : "POST",
                 contentType : false,
@@ -305,7 +277,7 @@
                 processData : false,
                 dataType : 'json',
                 success : function(response){
-                    $("#add_carte")[0].reset();
+                    $("#add_pneu")[0].reset();
                     $('#modal_add').modal('hide');
                     Toast.fire({
                         icon : 'success',
@@ -316,10 +288,11 @@
             });
             return false;
         });
-        $('#add_conso').unbind('submit').bind('submit', function() {
+
+    $('#modif_pneu').unbind('submit').bind('submit', function() {
         var form = new FormData(this);
             $.ajax({
-                url : "{{ route('add_conso') }}",
+                url : "{{ route('update_pneu') }}",
                 data : new FormData(this),
                 type : "POST",
                 contentType : false,
@@ -327,28 +300,7 @@
                 processData : false,
                 dataType : 'json',
                 success : function(response){
-                    $("#add_conso")[0].reset();
-                    $('#modal_add_conso').modal('hide');
-                    Toast.fire({
-                        icon : 'success',
-                        title : 'Enregistrer avec succes'
-                    });
-                }
-            });
-            return false;
-        });
-    $('#modif_carte').unbind('submit').bind('submit', function() {
-        var form = new FormData(this);
-            $.ajax({
-                url : "{{ route('update_carte') }}",
-                data : new FormData(this),
-                type : "POST",
-                contentType : false,
-                cache : false,
-                processData : false,
-                dataType : 'json',
-                success : function(response){
-                    $("#modif_carte")[0].reset();
+                    $("#modif_pneu")[0].reset();
                     $('#modal_modif').modal('hide');
                     Toast.fire({
                         icon : 'success',
@@ -362,19 +314,21 @@
     function modif(code){
         if(code){
             $.ajax({
-                    url:"{{ route('get_carte') }}",
+                    url:"{{ route('get_pneu') }}",
                     type: 'POST',
                     dataType: 'json',
                     data: {
                         _token : '{{ csrf_token() }}',
-                        id_carte : code
+                        id_pneu : code
                     },
                     success: function(response){
-                        $('#libelleMod').val(response[0].libelle);
-                        $('#plafondMod').val(response[0].plafond);
-                        $('#id_carte').val(response[0].id_carte);
+                        $('#numeroMod').val(response[0].numero);
+                        $('#referenceMod').val(response[0].reference);
+                        $('#marqueMod').val(response[0].marque);
+                        $('#prixMod').val(response[0].prix);
+                        $('#id_pneu').val(response[0].id_pneu);
+                        $('#date_pneuMod').val(response[0].date_pneu);
                         $('#modal_modif').modal('show');
-
                     }
                 });
         }else{
@@ -397,12 +351,12 @@
                     preConfirm: function() {
                         return new Promise(function(resolve) {
                             $.ajax({
-                                url: "{{ route('delete_carte') }}",
+                                url: "{{ route('delete_pneu') }}",
                                 type: 'POST',
                                 dataType: 'json',
                                 data: {
                                     _token : '{{ csrf_token() }}',
-                                    id_carte : code
+                                    id_pneu : code
                                 }
                             })
                             .done(function(response) {

@@ -155,12 +155,12 @@
                                             <input type="date" name="date_voyage" id="date_voyage" class="form-control" required>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-6 ">
                                                 <label>Chauffeur</label>
-                                                <select name="id_chauffeur" id="id_chauffeur" class="form-control">
+                                                <select name="id_chauffeur" id="id_chauffeur" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;">
                                                   <option></option>
                                                   @forelse ($chauffeur as $key)
-                                                      <option value="{{ $key->id_chauffeur }}"> {{ $key->nom }}</option>
+                                                      <option value="{{ $key->id_chauffeur }}"> {{ $key->prenom }}</option>
                                                   @empty
 
                                                   @endforelse
@@ -168,7 +168,7 @@
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Camion</label>
-                                                <select name="id_camion" id="id_camion" class="form-control" required>
+                                                <select name="id_camion" id="id_camion" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" required>
                                                     <option value=""></option>
                                                     @forelse ($camion as $key)
                                                         <option value="{{ $key->id_camion }}">{{ $key->matricule }}</option>
@@ -189,7 +189,7 @@
                                             </div> --}}
                                             <div class="form-group col-6">
                                                 <label for="">Transit</label>
-                                                <select  class="form-control" name="transit" id="transit">
+                                                <select  class="form-control select2bs4 select2-hidden-accessible" name="transit" id="transit" style="width: 100%;">
                                                     <option value=""></option>
                                                     @forelse ($transit as $key)
                                                         <option value="<?php echo $key->transit?>"> <?php echo $key->transit?></option>
@@ -203,7 +203,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Carte Gasoil </label>
-                                            <select name="id_carte" id="id_carte" class="form-control">
+                                            <select name="id_carte" id="id_carte" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;">
                                               <option></option>
                                               @forelse ($carte as $key)
                                                   <option value="{{ $key->id_carte }}"> {{ $key->libelle }}</option>
@@ -224,11 +224,25 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="prenom">Piece</label>
-                                            <input type="text" class="form-control" name="piece" id="piece" >
+                                            <select name="id_piece" id="id_piece" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;">
+                                                <option></option>
+                                                @forelse ($piece as $key)
+                                                    <option value="{{ $key->id_piece }}"> {{ $key->designation }}</option>
+                                                @empty
+
+                                                @endforelse
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cin">Pneu</label>
-                                            <input type="text" class="form-control" name="pneu" id="pneu" >
+                                            <label for="pneu">Pneu</label>
+                                            <select name="pneu" id="pneu" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;">
+                                                <option></option>
+                                                @forelse ($pneu as $key)
+                                                    <option value="{{ $key->id_pneu }}"> {{ $key->numero }}</option>
+                                                @empty
+
+                                                @endforelse
+                                              </select>
                                         </div>
                                     </div>
                                 </div>

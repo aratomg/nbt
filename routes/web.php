@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function(){
         Route::prefix('/consomation')->group(function(){
             Route::any('/', [ConsoGasoilController::class, 'index'])->name('page.conso');
             Route::post('/post', [ConsoGasoilController::class, 'Carte'])->name('conso');
+            Route::post('/add_autre', [ConsoGasoilController::class, 'add_autre_conso'])->name('add_conso');
         });
         Route::prefix('/detail')->group(function(){
             Route::post('/add', [DetailController::class, 'add'])->name('add_detail');
@@ -141,6 +142,14 @@ Route::middleware(['auth'])->group(function(){
         });
         Route::prefix('/autre')->group(function(){
             Route::post('/add', [AutreController::class, 'add'])->name('add_autre');
+        });
+        Route::prefix('/pneu')->group(function(){
+            Route::get('/', [PneuController::class , 'index'])->name('page.pneu');
+            Route::post('/add', [PneuController::class, 'add'])->name('add_pneu');
+            Route::post('/get', [PneuController::class, 'get'])->name('get_pneu');
+            Route::post('/update', [PneuController::class, 'update'])->name('update_pneu');
+            Route::post('/delete', [PneuController::class, 'delete'])->name('delete_pneu');
+            Route::get('/liste', [PneuController::class, 'list'])->name('liste_pneu');
         });
     });
 });

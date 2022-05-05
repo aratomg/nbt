@@ -126,6 +126,12 @@
                                                 Montant
                                             </th>
                                             <th>
+                                                Date payement
+                                            </th>
+                                            <th>
+                                                Montant payé
+                                            </th>
+                                            <th>
                                                 action
                                             </th>
                                         </tr>
@@ -236,6 +242,8 @@
                     {data: 'type'},
                     {data: 'date'},
                     {data: 'montant'},
+                    {data: 'date1'},
+                    {data: 'montant1'},
                     {data: 'action'}
                 ]
             });

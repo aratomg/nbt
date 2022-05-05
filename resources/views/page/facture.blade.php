@@ -132,9 +132,6 @@
                                                 Comission
                                             </th>
                                             <th>
-                                                Ref Marchandise
-                                            </th>
-                                            <th>
                                                 Nombre
                                             </th>
                                             <th>
@@ -221,7 +218,7 @@
                                         <thead>
                                             <tr role="row">
                                                 <th>
-
+                                                    N° Dossier
                                                 </th>
                                                 <th>
                                                     Nombre
@@ -416,7 +413,7 @@
                         // {data: 'client'},
                         {data : 'camion'},
                         {data : 'com'},
-                        {data : 'ref_marc'},
+                        // {data : 'ref_marc'},
                         {data : 'nombre'},
                         {data : 'prix_unitaire'},
                         {data : 'montant'},
@@ -448,7 +445,7 @@
             var checked = $(this);
             var input = checked.attr('type');
             if (reference.indexOf(checked.parents('tr').find('td:eq(0)').text()) < 0) {
-                $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+checked.val() +"</td><td>" + checked.parents('tr').find('td:eq(5)')
+                $("#list_voyage_facture > tbody").append("<tr><td class=\"hidden\">"+checked.val() +"</td><td><div class='form-group'><input type='text' class='form-control' name='BL' id='Bl' ></div></td><td>" + checked.parents('tr').find('td:eq(5)')
                     .text() +" DU "+ checked.parents('tr').find('td:eq(1)').text() +" Cam N° "+ checked.parents('tr').find('td:eq(4)').text() +"</td><td>" + checked.parents('tr').find('td:eq(6)')
                     .text() + "</td><td>"+ checked.parents('tr').find('td:eq(7)')
                     .text() + "</td><td>"+  checked.parents('tr').find('td:eq(8)')

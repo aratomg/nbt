@@ -19,12 +19,12 @@ class ChekController extends Controller
     }
     public function liste()
     {
-        $chek = Chek::join('facture', 'chek.id_facture', '=', 'facture.id_facture')->orderBy('date_chek', 'Desc')->get();
+        $chek = Chek::orderBy('date_chek', 'Desc')->get();
         if(count($chek)>0){
             foreach ($chek as $key) {
                 $output['data'][] = array(
                     'numero' => $key->numero,
-                    'designation' => $key->type.' '.$key->client,
+                    'designation' => $key->designation,
                     'date' => $key->date_chek,
                     'montant' => $key->montant_chek
                 );

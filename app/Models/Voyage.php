@@ -20,6 +20,7 @@ class Voyage extends Model
         'id_chauffeur',
         'com',
         'montant',
-        'id_carte'
+        'id_carte',
+        'bl'
     ];
 }

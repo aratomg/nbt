@@ -51,7 +51,7 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="{{ str_replace('index.php', '', url('/')) }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ str_replace('index.php', '', url('/')) }}dist/js/demo.js"></script>
-
+<script src="{{ str_replace('index.php', '', url('/')) }}/plugins/select2/js/select2.full.min.js"></script>
 <script>
     const Toast = Swal.mixin({
         toast: true,
@@ -59,6 +59,14 @@ $.widget.bridge('uibutton', $.ui.button)
         showConfirmButton: false,
         timer: 3000
         });
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
 </script>
 @yield('script')
 </body>

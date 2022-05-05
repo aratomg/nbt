@@ -7,6 +7,8 @@ use App\Imports\VoyageImport;
 use App\Models\Camion;
 use App\Models\Chauffeur;
 use App\Models\Gasoil;
+use App\Models\Piece;
+use App\Models\Pneu;
 use App\Models\Transit;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
@@ -20,11 +22,15 @@ class VoyageController extends Controller
         $carte = Gasoil::all();
         $camion = Camion::all();
         $chauffeur = Chauffeur::all();
+        $piece = Piece::all();
+        $pneu = Pneu::all();
         $data = array(
             'chauffeur' => $chauffeur,
             'camion' => $camion,
             'carte' => $carte,
-            'transit' => $transit
+            'transit' => $transit,
+            'pneu' => $pneu,
+            'piece' => $piece
         );
         return view('page.voyage', $data);
     }

@@ -30,7 +30,8 @@ class JournalController extends Controller
         ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')->whereBetween('date_voyage', [$annee.'-1-01', $annee.'-12-31'])->get();
         $voyage1 = Voyage::join('depense', 'depense.id_voyage', '=', 'voyage.id_voyage')
         ->join('chauffeur', 'chauffeur.id_chauffeur', '=', 'voyage.id_chauffeur')
-        ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')->whereNotNull('pneu')->whereBetween('date_voyage', [$annee.'-1-01', $annee.'-12-31'])->get();
+        ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')
+        ->join('pneu', 'pneu.id_pneu','=', 'depense.pneu')->whereNotNull('depense.pneu')->whereBetween('date_voyage', [$annee.'-1-01', $annee.'-12-31'])->get();
         $voyage2 = Voyage::join('depense', 'depense.id_voyage', '=', 'voyage.id_voyage')
         ->join('chauffeur', 'chauffeur.id_chauffeur', '=', 'voyage.id_chauffeur')
         ->join('camion', 'camion.id_camion', '=', 'voyage.id_camion')->whereNotNull('piece')->whereBetween('date_voyage', [$annee.'-1-01', $annee.'-12-31'])->get();
@@ -41,20 +42,26 @@ class JournalController extends Controller
                 'date' => $key->date_voyage,
                 'designation' => 'vatsy '.$key->nom,
                 'camion' => $key->vatsy,
+                'chek' => '',
+                'autre' => ''
             );
         }
         foreach ($voyage2 as $key) {
             $journal['data'][] = array(
                 'date' => $key->date_voyage,
                 'designation' => 'Piece Camion '.$key->matricule,
-                'camion' => $key->piece
+                'camion' => $key->piece,
+                'chek' => '',
+                'autre' => ''
             );
         }
         foreach ($voyage1 as $key) {
             $journal['data'][] = array(
                 'date' => $key->date_voyage,
                 'designation' => 'Pneu',
-                'camion' => $key->pneu
+                'camion' => $key->prix_pneu,
+                'chek' => '',
+                'autre' => ''
             );
         }
         foreach ($chek as $key) {
@@ -62,6 +69,8 @@ class JournalController extends Controller
                 'date' => $key->date_chek,
                 'designation' => 'Chek',
                 'chek' => $key->montant_chek,
+                'camion' => '',
+                'autre' => '',
             );
         }
         foreach ($autre as $key) {
@@ -69,6 +78,8 @@ class JournalController extends Controller
                 'date' => $key->date_autre,
                 'designation' => $key->designation,
                 'autre' => $key->montant,
+                'chek' => '',
+                'camion' => ''
             );
         }
         // foreach ($journal as $key => $row) {

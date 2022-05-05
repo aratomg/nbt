@@ -218,18 +218,26 @@
                 <div class="modal-body">
                   <form id="pneu">
                       @csrf
-                        <div class="form-group">
-                            <label for="cin">Date</label>
-                            <input type="date" class="form-control" name="date_pneu" id="date_pneu" >
-                        </div>
-                        <div class="form-group">
-                            <label for="desigantion">Désigantion</label>
-                            <input class="form-control" type="text" name="designation" id="designation">
-                        </div>
-                        <div class="form-group">
-                            <label for="prenom">Prix</label>
-                            <input type="text" class="form-control" name="prix" id="prix" >
-                        </div>
+                    <div class="form-group">
+                        <label for="dte_pneu">Date Achat</label>
+                        <input type="date" name="date_pneu" id="date_pneu" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="numero">numero</label>
+                        <input type="text" class="form-control" name="numero" id="numero" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reference">Reference</label>
+                        <input type="text" class="form-control" name="reference" id="reference" min="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="marque">Marque</label>
+                        <input type="text" class="form-control" name="marque" id="marque" >
+                    </div>
+                    <div class="form-group">
+                      <label for="prix">Prix</label>
+                      <input type="text" name="prix_pneu" id="prix_pneu" class="form-control" required>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
